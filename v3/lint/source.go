@@ -38,6 +38,9 @@ const (
 	AppleRootStorePolicy     LintSource = "Apple"
 	Community                LintSource = "Community"
 	EtsiEsi                  LintSource = "ETSI_ESI"
+	ATIS1000080              LintSource = "ATIS-1000080v4"
+	CPv1_3                   LintSource = "CPv1.3"
+	ShakenPKI                LintSource = "SHAKEN PKI Best Practice"
 )
 
 // UnmarshalJSON implements the json.Unmarshaler interface. It ensures that the
@@ -49,7 +52,7 @@ func (s *LintSource) UnmarshalJSON(data []byte) error {
 	}
 
 	switch LintSource(throwAway) {
-	case RFC5280, RFC5480, RFC5891, CABFBaselineRequirements, CABFEVGuidelines, MozillaRootStorePolicy, AppleRootStorePolicy, Community, EtsiEsi:
+	case RFC5280, RFC5480, RFC5891, CABFBaselineRequirements, CABFEVGuidelines, MozillaRootStorePolicy, AppleRootStorePolicy, Community, EtsiEsi, ATIS1000080, CPv1_3, ShakenPKI:
 		*s = LintSource(throwAway)
 		return nil
 	default:
@@ -85,6 +88,12 @@ func (s *LintSource) FromString(src string) {
 		*s = Community
 	case EtsiEsi:
 		*s = EtsiEsi
+	case ATIS1000080:
+		*s = ATIS1000080
+	case CPv1_3:
+		*s = CPv1_3
+	case ShakenPKI:
+		*s = ShakenPKI
 	}
 }
 

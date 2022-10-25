@@ -21,6 +21,8 @@ import (
 	"encoding/pem"
 	"fmt"
 	"os"
+	"reflect"
+	"testing"
 
 	"os/exec"
 	"path"
@@ -121,4 +123,87 @@ func ReadTestCert(inPath string) *x509.Certificate {
 	}
 
 	return theCert
+}
+
+type CheckAppliesArgs struct {
+	Cert *x509.Certificate
+}
+
+type CheckAppliesVector struct {
+	Name string
+	File string
+	Want bool
+}
+
+// CheckApplies runs CheckApplies test for the given vector
+func CheckApplies(t *testing.T, name string, vectors []CheckAppliesVector) {
+	for _, tt := range vectors {
+		t.Run(tt.Name, func(t *testing.T) {
+			c := lint.GlobalRegistry().ByName(name).Lint()
+			if got := c.CheckApplies(ReadTestCert(tt.File)); got != tt.Want {
+				t.Errorf("%s.CheckApplies() = %v, want %v", name, got, tt.Want)
+			}
+		})
+	}
+}
+
+func checkAppliesBasicConst(t *testing.T, name string, leaf bool, intermediate bool, root bool) {
+	CheckApplies(t, name, []CheckAppliesVector{
+		{
+			Name: "Leaf certificate",
+			File: "shakenCert.pem",
+			Want: leaf,
+		},
+		{
+			Name: "Intermediate certificate",
+			File: "shakenCa.pem",
+			Want: intermediate,
+		},
+		{
+			Name: "Root certificate",
+			File: "shakenRoot.pem",
+			Want: root,
+		},
+	})
+}
+
+// CheckAppliesAllCertificates runs CheckApplies to check that the certificate can be Leaf only
+func CheckAppliesLeafCertificate(t *testing.T, lintName string) {
+	checkAppliesBasicConst(t, lintName, true, false, false)
+}
+
+// CheckAppliesIntermediateCertificate runs CheckApplies to check that the certificate can be Intermediate only
+func CheckAppliesIntermediateCertificate(t *testing.T, lintName string) {
+	checkAppliesBasicConst(t, lintName, false, true, false)
+}
+
+// CheckAppliesRootCertificate runs CheckApplies to check that the certificate can be Root only
+func CheckAppliesRootCertificate(t *testing.T, lintName string) {
+	checkAppliesBasicConst(t, lintName, false, false, true)
+}
+
+// CheckAppliesRootOrIntermediateCertificate runs CheckApplies to check that the certificate can Intermediate and Root
+func CheckAppliesRootOrIntermediateCertificate(t *testing.T, name string) {
+	checkAppliesBasicConst(t, name, false, true, true)
+}
+
+// CheckAppliesAllCertificates runs CheckApplies to check that the certificate can be Leaf, Intermediate and Root
+func CheckAppliesAllCertificates(t *testing.T, lintName string) {
+	checkAppliesBasicConst(t, lintName, true, true, true)
+}
+
+type Vector struct {
+	Name string
+	File string
+	Want *lint.LintResult
+}
+
+func Execute(t *testing.T, name string, tests []Vector) {
+	for _, tt := range tests {
+		t.Run(tt.Name, func(t *testing.T) {
+			if got := TestLint(name, tt.File); !reflect.DeepEqual(got, tt.Want) {
+				t.Errorf("%s.Execute() = %v, want %v", name, got, tt.Want)
+			}
+		})
+	}
 }
