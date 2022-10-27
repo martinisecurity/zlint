@@ -14,7 +14,7 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "e_sti_ca_subject_cn",
 		Description:   "For non-End-Entity CA certificates, the Common Name attribute shall include the text string \"SHAKEN\" and also indicate whether the certificate is a root or intermediate certificate",
-		Citation:      ATIS1000080_STI_Citation,
+		Citation:      ATIS1000080v004_STI_Citation,
 		Source:        lint.ATIS1000080,
 		EffectiveDate: util.ATIS1000080_v004_Date,
 		Lint:          NewCaSubjectCN,
