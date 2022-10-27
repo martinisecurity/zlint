@@ -12,9 +12,9 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "w_cp1_3_ca_subject_rdn_unknown",
 		Description:   subjectRdn_details,
-		Citation:      CPv1_3_Citation,
-		Source:        lint.CPv1_3,
-		EffectiveDate: util.CPv1_3_Date,
+		Citation:      United_States_SHAKEN_CP_Citation,
+		Source:        lint.UnitedStatesSHAKENCP,
+		EffectiveDate: util.UnitedStatesSHAKENCP_Date,
 		Lint:          NewCaSubjectRdnUnknown,
 	})
 }

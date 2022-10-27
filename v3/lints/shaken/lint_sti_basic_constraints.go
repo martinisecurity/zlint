@@ -19,9 +19,9 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "e_sti_basic_constraints",
 		Description:   "STI certificates shall contain a Basic Constraints extension marked critical",
-		Citation:      ATIS1000080_STI_Citation,
+		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Date,
+		EffectiveDate: util.ATIS1000080_v003_Date,
 		Lint:          NewBasicConstraints,
 	})
 }
