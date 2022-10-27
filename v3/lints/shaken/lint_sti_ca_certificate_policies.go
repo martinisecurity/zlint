@@ -12,7 +12,7 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "e_sti_ca_certificate_policies",
 		Description:   "STI Intermediate certificates shall include a Certificate Policies extension containing a single OID value that identifies the SHAKEN Certificate Policy established by the STI-PA",
-		Citation:      ATIS1000080_STI_Citation,
+		Citation:      ATIS1000080v004_STI_Citation,
 		Source:        lint.ATIS1000080,
 		EffectiveDate: util.ATIS1000080_v004_Date,
 		Lint:          NewCaCertificatePolicies,
@@ -31,7 +31,7 @@ func (*caCertificatePolicies) CheckApplies(c *x509.Certificate) bool {
 // Execute implements lint.LintInterface
 func (*caCertificatePolicies) Execute(c *x509.Certificate) *lint.LintResult {
 	if len(c.PolicyIdentifiers) == 1 {
-		if c.NotBefore.After(util.CPv1_3_Leaf_Date) && !c.PolicyIdentifiers[0].Equal(util.ShakenCPv1_3OID) {
+		if c.NotBefore.After(util.UnitedStatesSHAKENCP_Leaf_Date) && !c.PolicyIdentifiers[0].Equal(util.ShakenUnitedStatesSHAKENCPOID) {
 			return &lint.LintResult{
 				Status:  lint.Error,
 				Details: "STI certificate shall contain '2.16.840.1.114569.1.1.3' policy",

@@ -12,9 +12,9 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "e_sti_ca_issuer_dn",
 		Description:   subject_details,
-		Citation:      ATIS1000080_STI_Citation,
+		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Leaf_Date,
+		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
 		Lint:          NewCaIssuerDn,
 	})
 }

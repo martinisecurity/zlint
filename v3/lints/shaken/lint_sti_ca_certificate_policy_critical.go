@@ -12,7 +12,7 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "n_sti_ca_certificate_policy_critical",
 		Description:   "STI certificates should contain a CertificatePolicies extension marked uncritical",
-		Citation:      ATIS1000080_STI_Citation,
+		Citation:      ATIS1000080v004_STI_Citation,
 		Source:        lint.ATIS1000080,
 		EffectiveDate: util.ATIS1000080_v004_Date,
 		Lint:          NewCaCertificatePolicyCritical,

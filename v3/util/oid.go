@@ -96,7 +96,7 @@ var (
 	IdEtsiQcsQctWeb            = asn1.ObjectIdentifier{0, 4, 0, 1862, 1, 6, 3}
 	// SHAKEN policies
 	ShakenCPv1_1OID = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 1}
-	ShakenCPv1_3OID = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 3}
+	ShakenUnitedStatesSHAKENCPOID = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 3}
 )
 
 const (

@@ -12,7 +12,7 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "e_sti_ca_serial_number",
 		Description:   "STI certificates shall include a Serial Number field containing an integer greater than zero. The serial number shall contain at least 64 bits of output from a Cryptographically Secure PseudoRandom Number Generator (CSPRNG)",
-		Citation:      ATIS1000080_STI_Citation,
+		Citation:      ATIS1000080v004_STI_Citation,
 		Source:        lint.ATIS1000080,
 		EffectiveDate: util.ATIS1000080_v004_Date,
 		Lint:          NewCaSerialNumber,

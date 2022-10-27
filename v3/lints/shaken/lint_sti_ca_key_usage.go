@@ -12,9 +12,9 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "e_sti_ca_key_usage",
 		Description:   "STI certificates shall contain a Key Usage extension marked as critical. For root and intermediate certificates, the Key Usage extension shall contain the key usage value keyCertSign (5), and may contain the key usage values digitalSignature (0) and/or cRLSign (6)",
-		Citation:      ATIS1000080_STI_Citation,
+		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Date,
+		EffectiveDate: util.ATIS1000080_v003_Date,
 		Lint:          NewCaKeyUsage,
 	})
 }

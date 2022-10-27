@@ -24,9 +24,9 @@ func init() {
 		Description: "For root certificates that contain an Authority Key Identifier extension, " +
 			"the Authority Key Identifier shall contain a keyIdentifier field with a value that matches " +
 			"the Subject Key Identifier value of the same root certificate",
-		Citation:      ATIS1000080_STI_Citation,
+		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Date,
+		EffectiveDate: util.ATIS1000080_v003_Date,
 		Lint:          NewRootAuthorityKeyIdentifier,
 	})
 }
