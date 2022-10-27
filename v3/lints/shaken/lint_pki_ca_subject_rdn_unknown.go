@@ -10,11 +10,11 @@ type caSubjectRdnUnknown struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "w_cp1_3_ca_subject_rdn_unknown",
+		Name:          "w_pki_ca_subject_rdn_unknown",
 		Description:   subjectRdn_details,
-		Citation:      United_States_SHAKEN_CP_Citation,
-		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCP_Date,
+		Citation:      PKI_Citation,
+		Source:        lint.ShakenPKI,
+		EffectiveDate: util.ZeroDate,
 		Lint:          NewCaSubjectRdnUnknown,
 	})
 }
@@ -34,12 +34,13 @@ func (*caSubjectRdnUnknown) Execute(c *x509.Certificate) *lint.LintResult {
 		"2.5.4.3",  // commonName
 		"2.5.4.6",  // countryName
 		"2.5.4.10", // organization
+		"2.5.4.7",  // localityName
 	})
 	for _, name := range c.Subject.Names {
 		if !list.Contains(name.Type.String()) {
 			return &lint.LintResult{
 				Status:  lint.Warn,
-				Details: "Only CN, C, and O can be included. Additional RNDs may introduce ambiguity and may not be verifiable",
+				Details: "Only CN, C, L, and O should be included. Additional RNDs may introduce ambiguity and may not be verifiable",
 			}
 		}
 	}
