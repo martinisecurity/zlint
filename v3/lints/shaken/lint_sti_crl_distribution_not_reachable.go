@@ -28,7 +28,7 @@ func init() {
 		Description:   crlDistributionNotReachable_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Leaf_Date,
+		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
 		Lint: func() lint.LintInterface {
 			return NewCrlDistributionNotReachable(false)
 		},
@@ -38,7 +38,7 @@ func init() {
 		Description:   crlDistributionNotReachable_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Date,
+		EffectiveDate: util.ATIS1000080_v003_Date,
 		Lint: func() lint.LintInterface {
 			return NewCrlDistributionNotReachable(true)
 		},
