@@ -30,11 +30,11 @@ func Test_crlDistribution_Execute(t *testing.T) {
 			},
 		},
 		{
-			Name: "CRL is not reachable",
-			File: "shakenCRLPointUnreachable.pem",
+			Name: "CRL is multiple",
+			File: "shakenCRLPointFile.pem",
 			Want: &lint.LintResult{
 				Status:  lint.Error,
-				Details: "CRL Distribution Point shall be reachable if the requesting IP address within the program ACLs",
+				Details: "DistributionPoint filed shall contain the HTTP URL reference to the CRL",
 			},
 		},
 		{

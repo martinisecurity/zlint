@@ -2,7 +2,7 @@ package shaken
 
 import (
 	"fmt"
-	"net/http"
+	"strings"
 
 	"github.com/zmap/zcrypto/x509"
 	"github.com/zmap/zlint/v3/lint"
@@ -56,8 +56,10 @@ func assertCrlDistributionPoint(c *x509.Certificate) error {
 	if len(c.CRLDistributionPoints) != 1 {
 		return fmt.Errorf("CRL Distribution Points extension should contain a single DistributionPoint entry")
 	}
-	if _, err := http.Get(c.CRLDistributionPoints[0]); err != nil {
-		return fmt.Errorf("CRL Distribution Point shall be reachable if the requesting IP address within the program ACLs")
+
+	if !strings.HasPrefix(c.CRLDistributionPoints[0], "http") {
+		return fmt.Errorf("DistributionPoint filed shall contain the HTTP URL reference to the CRL")
 	}
+
 	return nil
 }
