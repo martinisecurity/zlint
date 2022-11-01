@@ -14,9 +14,9 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "e_us_cp_ambiguous_identifier",
 		Description:   "Names used in the STI certificates shall represent an unambiguous identifier for the SP Subject",
-		Citation:      United_States_SHAKEN_CP_Citation,
+		Citation:      United_States_SHAKEN_CPv1_1_Citation_3_1,
 		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Leaf_Date,
+		EffectiveDate: util.UnitedStatesSHAKENCPv1_1_Date,
 		Lint:          NewAmbiguousIdentifiers,
 	})
 }

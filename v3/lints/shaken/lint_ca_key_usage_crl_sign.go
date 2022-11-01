@@ -14,9 +14,9 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "e_us_cp_ca_key_usage_crl_sign",
 		Description:   caKeyUsageCrlSign_details,
-		Citation:      United_States_SHAKEN_CP_Citation_4_9,
+		Citation:      United_States_SHAKEN_CPv1_1_Citation_4_9,
 		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Date,
+		EffectiveDate: util.UnitedStatesSHAKENCPv1_1_Date,
 		Lint:          NewCaKeyUsageCrlSign,
 	})
 }

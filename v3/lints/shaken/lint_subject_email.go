@@ -12,9 +12,9 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "w_cp_1_3_subject_email",
 		Description:   "Information that is not verified shall not be included in certificates",
-		Citation:      United_States_SHAKEN_CP_Citation,
+		Citation:      United_States_SHAKEN_CPv1_1_Citation_3_2,
 		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Leaf_Date,
+		EffectiveDate: util.UnitedStatesSHAKENCPv1_1_Leaf_Date,
 		Lint:          NewSubjectEmail,
 	})
 }
