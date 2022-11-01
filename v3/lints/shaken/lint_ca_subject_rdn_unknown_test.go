@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caSubjectRdnUnknown_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootOrIntermediateCertificate(t, "w_pki_ca_subject_rdn_unknown")
+	test.CheckAppliesRootOrIntermediateCertificate(t, "w_shaken_ca_subject_rdn_unknown")
 }
 
 func Test_caSubjectRdnUnknown_Execute(t *testing.T) {
-	test.Execute(t, "w_pki_ca_subject_rdn_unknown", []test.Vector{
+	test.Execute(t, "w_shaken_ca_subject_rdn_unknown", []test.Vector{
 		{
 			Name: "RDN is correct", // CN, C, O
 			File: "shakenCaSubject.pem",

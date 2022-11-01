@@ -8,11 +8,11 @@ import (
 )
 
 func Test_subjectRdnUnknown_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "w_pki_subject_rdn_unknown")
+	test.CheckAppliesLeafCertificate(t, "w_shaken_subject_rdn_unknown")
 }
 
 func Test_subjectRdnUnknown_Execute(t *testing.T) {
-	test.Execute(t, "w_pki_subject_rdn_unknown", []test.Vector{
+	test.Execute(t, "w_shaken_subject_rdn_unknown", []test.Vector{
 		{
 			Name: "RDN is correct", // CN, C, O, SERIALNUMBER
 			File: "shakenSubject.pem",

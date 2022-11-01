@@ -12,7 +12,7 @@ type subjectRdnUnknown struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "w_pki_subject_rdn_unknown",
+		Name:          "w_shaken_subject_rdn_unknown",
 		Description:   subjectRdn_details,
 		Citation:      PKI_Citation,
 		Source:        lint.ShakenPKI,
