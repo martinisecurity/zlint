@@ -1,0 +1,63 @@
+linters-settings:
+  gocyclo:
+    min-complexity: 25
+  govet:
+    check-shadowing: false
+  misspell:
+    locale: "US"
+
+linters:
+  enable-all: true
+  disable:
+    - stylecheck
+    - gosec
+    - dupl
+    - maligned
+    - depguard
+    - lll
+    - prealloc
+    - scopelint
+    - gocritic
+    - gochecknoinits
+    - gochecknoglobals
+    - godox
+    - funlen
+    - wsl
+    - whitespace
+    - gocognit
+    - testpackage
+    - goerr113
+    - gomnd
+    - gofumpt
+    - exhaustive
+    - goconst
+    - golint
+    - godot
+    - forbidigo
+    - nlreturn
+    - ireturn
+    - paralleltest
+    - varnamelen
+    - wrapcheck
+    - ifshort
+    - gci
+    - exhaustivestruct
+    - cyclop
+    - errorlint
+    - revive
+    - errname
+    - forcetypeassert
+    - tagliatelle
+    - nilnil
+
+issues:
+  exclude-rules:
+    # The existing ETSI lints have some gnarly logic that needs
+    # simplification/cleanup. For now we skip some linters for this dir.
+    - path: lints/etsi/
+      linters:
+        - nestif
+        - gosimple
+    - path: util/qc_stmt.go
+      linters:
+        - nestif
