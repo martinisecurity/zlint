@@ -8,11 +8,11 @@ import (
 )
 
 func Test_subjectSN_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_cp1_3_subject_sn")
+	test.CheckAppliesLeafCertificate(t, "e_us_cp_subject_sn")
 }
 
 func Test_subjectSN_Execute(t *testing.T) {
-	test.Execute(t, "e_cp1_3_subject_sn", []test.Vector{
+	test.Execute(t, "e_us_cp_subject_sn", []test.Vector{
 		{
 			Name: "SERIALNUMBER is absent",
 			File: "shakenSubjectWithoutSerialNumber.pem",

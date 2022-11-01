@@ -12,7 +12,7 @@ type ambiguousIdentifiers struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_cp1_3_ambiguous_identifier",
+		Name:          "e_us_cp_ambiguous_identifier",
 		Description:   "Names used in the STI certificates shall represent an unambiguous identifier for the SP Subject",
 		Citation:      United_States_SHAKEN_CP_Citation,
 		Source:        lint.UnitedStatesSHAKENCP,

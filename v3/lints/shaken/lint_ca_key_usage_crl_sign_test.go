@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caKeyUsageCrlSign_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootOrIntermediateCertificate(t, "e_cp1_3_ca_key_usage_crl_sign")
+	test.CheckAppliesRootOrIntermediateCertificate(t, "e_us_cp_ca_key_usage_crl_sign")
 }
 
 func Test_caKeyUsageCrlSign_Execute(t *testing.T) {
-	test.Execute(t, "e_cp1_3_ca_key_usage_crl_sign", []test.Vector{
+	test.Execute(t, "e_us_cp_ca_key_usage_crl_sign", []test.Vector{
 		{
 			Name: "without crlSign",
 			File: "shakenCa.pem",

@@ -8,11 +8,11 @@ import (
 )
 
 func Test_ambiguousIdentifiers_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_cp1_3_ambiguous_identifier")
+	test.CheckAppliesLeafCertificate(t, "e_us_cp_ambiguous_identifier")
 }
 
 func Test_ambiguousIdentifiers_Execute(t *testing.T) {
-	test.Execute(t, "e_cp1_3_ambiguous_identifier", []test.Vector{
+	test.Execute(t, "e_us_cp_ambiguous_identifier", []test.Vector{
 		{
 			Name: "CN is empty",
 			File: "subjectEmpty.pem",

@@ -12,7 +12,7 @@ const caKeyUsageCrlSign_details = "The model for managing and communicating the 
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_cp1_3_ca_key_usage_crl_sign",
+		Name:          "e_us_cp_ca_key_usage_crl_sign",
 		Description:   caKeyUsageCrlSign_details,
 		Citation:      United_States_SHAKEN_CP_Citation_4_9,
 		Source:        lint.UnitedStatesSHAKENCP,
