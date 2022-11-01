@@ -31,7 +31,7 @@ func (*certificatePolicies) CheckApplies(c *x509.Certificate) bool {
 // Execute implements lint.LintInterface
 func (*certificatePolicies) Execute(c *x509.Certificate) *lint.LintResult {
 	if len(c.PolicyIdentifiers) == 1 {
-		if c.NotBefore.After(util.UnitedStatesSHAKENCP_Leaf_Date) && !c.PolicyIdentifiers[0].Equal(util.ShakenUnitedStatesSHAKENCPOID) {
+		if c.NotBefore.After(util.UnitedStatesSHAKENCPv1_3_Leaf_Date) && !c.PolicyIdentifiers[0].Equal(util.ShakenUnitedStatesSHAKENCPOID) {
 			return &lint.LintResult{
 				Status:  lint.Error,
 				Details: "STI certificate shall contain '2.16.840.1.114569.1.1.3' policy",

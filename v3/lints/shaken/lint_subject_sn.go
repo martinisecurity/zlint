@@ -18,7 +18,7 @@ func init() {
 		Description:   "The ‘serialNumber’ attribute shall be included along with the CN",
 		Citation:      United_States_SHAKEN_CP_Citation,
 		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCP_Leaf_Date,
+		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Leaf_Date,
 		Lint:          NewSubjectSN,
 	})
 }

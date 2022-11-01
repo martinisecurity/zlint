@@ -16,7 +16,7 @@ func init() {
 		Description:   "Names used in the STI certificates shall represent an unambiguous identifier for the SP Subject",
 		Citation:      United_States_SHAKEN_CP_Citation,
 		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCP_Leaf_Date,
+		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Leaf_Date,
 		Lint:          NewAmbiguousIdentifiers,
 	})
 }

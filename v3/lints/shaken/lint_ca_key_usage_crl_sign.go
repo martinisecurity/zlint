@@ -16,7 +16,7 @@ func init() {
 		Description:   caKeyUsageCrlSign_details,
 		Citation:      United_States_SHAKEN_CP_Citation_4_9,
 		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCP_Date,
+		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Date,
 		Lint:          NewCaKeyUsageCrlSign,
 	})
 }

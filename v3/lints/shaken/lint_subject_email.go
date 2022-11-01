@@ -14,7 +14,7 @@ func init() {
 		Description:   "Information that is not verified shall not be included in certificates",
 		Citation:      United_States_SHAKEN_CP_Citation,
 		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCP_Leaf_Date,
+		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Leaf_Date,
 		Lint:          NewSubjectEmail,
 	})
 }
