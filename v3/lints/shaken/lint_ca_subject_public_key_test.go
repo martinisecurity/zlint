@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caSubjectPublicKey_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootOrIntermediateCertificate(t, "e_sti_ca_subject_public_key")
+	test.CheckAppliesRootOrIntermediateCertificate(t, "e_atis_ca_subject_public_key")
 }
 
 func Test_caSubjectPublicKey_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_ca_subject_public_key", []test.Vector{
+	test.Execute(t, "e_atis_ca_subject_public_key", []test.Vector{
 		{
 			Name: "incorrect algorithm",
 			File: "shakenCaKeyAlgRSA.pem",

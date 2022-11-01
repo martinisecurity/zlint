@@ -8,11 +8,11 @@ import (
 )
 
 func Test_certificatePolicies_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_certificate_policies")
+	test.CheckAppliesLeafCertificate(t, "e_atis_certificate_policies")
 }
 
 func Test_certificatePolicies_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_certificate_policies", []test.Vector{
+	test.Execute(t, "e_atis_certificate_policies", []test.Vector{
 		{
 			Name: "extension is absent",
 			File: "shakenCertPolicyNo.pem",

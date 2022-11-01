@@ -8,11 +8,11 @@ import (
 )
 
 func Test_crlCaDistribution_CheckApplies(t *testing.T) {
-	test.CheckAppliesIntermediateCertificate(t, "e_sti_ca_crl_distribution")
+	test.CheckAppliesIntermediateCertificate(t, "e_atis_ca_crl_distribution")
 }
 
 func Test_crlCaDistribution_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_ca_crl_distribution", []test.Vector{
+	test.Execute(t, "e_atis_ca_crl_distribution", []test.Vector{
 		{
 			Name: "extension is correct",
 			File: "shakenCa.pem",

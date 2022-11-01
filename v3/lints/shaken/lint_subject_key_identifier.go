@@ -14,7 +14,7 @@ type subjectKeyIdentifier struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_subject_key_identifier",
+		Name:          "e_atis_subject_key_identifier",
 		Description:   subjectKeyIdentifier_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

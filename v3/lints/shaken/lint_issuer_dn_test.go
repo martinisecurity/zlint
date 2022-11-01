@@ -8,11 +8,11 @@ import (
 )
 
 func Test_issuer_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_issuer_dn")
+	test.CheckAppliesLeafCertificate(t, "e_atis_issuer_dn")
 }
 
 func Test_issuer_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_issuer_dn", []test.Vector{
+	test.Execute(t, "e_atis_issuer_dn", []test.Vector{
 		{
 			Name: "correct DN",
 			File: "shakenCert.pem",

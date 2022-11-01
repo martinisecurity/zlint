@@ -8,11 +8,11 @@ import (
 )
 
 func Test_authorityKeyIdentifier_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_authority_key_identifier")
+	test.CheckAppliesLeafCertificate(t, "e_atis_authority_key_identifier")
 }
 
 func Test_authorityKeyIdentifier_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_authority_key_identifier", []test.Vector{
+	test.Execute(t, "e_atis_authority_key_identifier", []test.Vector{
 		{
 			Name: "AKI extension is absent",
 			File: "shakenSubject.pem",

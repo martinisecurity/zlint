@@ -8,11 +8,11 @@ import (
 )
 
 func Test_keyUsage_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_key_usage")
+	test.CheckAppliesLeafCertificate(t, "e_atis_key_usage")
 }
 
 func Test_keyUsage_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_key_usage", []test.Vector{
+	test.Execute(t, "e_atis_key_usage", []test.Vector{
 		{
 			Name: "extension is absent",
 			File: "shakenCertEmpty.pem",

@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caSerialNumber_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootOrIntermediateCertificate(t, "e_sti_ca_serial_number")
+	test.CheckAppliesRootOrIntermediateCertificate(t, "e_atis_ca_serial_number")
 }
 
 func Test_caSerialNumber_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_ca_serial_number", []test.Vector{
+	test.Execute(t, "e_atis_ca_serial_number", []test.Vector{
 		{
 			Name: "SN is negative",
 			File: "shakenCaSerialNegative.pem",

@@ -8,11 +8,11 @@ import (
 )
 
 func Test_rootExtensionUnknown_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootCertificate(t, "e_sti_root_extension_unknown")
+	test.CheckAppliesRootCertificate(t, "e_atis_root_extension_unknown")
 }
 
 func Test_rootExtensionUnknown_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_root_extension_unknown", []test.Vector{
+	test.Execute(t, "e_atis_root_extension_unknown", []test.Vector{
 		{
 			Name: "list of allowed extension",
 			File: "shakenRoot.pem",

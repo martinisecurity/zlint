@@ -10,7 +10,7 @@ type keyUsage struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_key_usage",
+		Name:          "e_atis_key_usage",
 		Description:   "STI certificates shall contain a Key Usage extension marked as critical. For End-Entity certificates, the Key Usage extension shall contain a single key usage value of digitalSignature (0).",
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

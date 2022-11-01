@@ -8,11 +8,11 @@ import (
 )
 
 func Test_serialNumber_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_serial_number")
+	test.CheckAppliesLeafCertificate(t, "e_atis_serial_number")
 }
 
 func Test_serialNumber_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_serial_number", []test.Vector{
+	test.Execute(t, "e_atis_serial_number", []test.Vector{
 		{
 			Name: "SN is negative",
 			File: "shakenSerialNumberNegative.pem",

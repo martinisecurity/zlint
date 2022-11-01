@@ -8,11 +8,11 @@ import (
 )
 
 func Test_basicConstraints_CheckApplies(t *testing.T) {
-	test.CheckAppliesAllCertificates(t, "e_sti_basic_constraints")
+	test.CheckAppliesAllCertificates(t, "e_atis_basic_constraints")
 }
 
 func Test_basicConstraints_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_basic_constraints", []test.Vector{
+	test.Execute(t, "e_atis_basic_constraints", []test.Vector{
 		{
 			Name: "extension is absent",
 			File: "shakenBasicConstNo.pem",

@@ -8,11 +8,11 @@ import (
 )
 
 func Test_signatureAlgorithm_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_signature_algorithm")
+	test.CheckAppliesLeafCertificate(t, "e_atis_signature_algorithm")
 }
 
 func Test_signatureAlgorithm_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_signature_algorithm", []test.Vector{
+	test.Execute(t, "e_atis_signature_algorithm", []test.Vector{
 		{
 			Name: "incorrect algorithm",
 			File: "shakenSigAlgSHA1.pem",

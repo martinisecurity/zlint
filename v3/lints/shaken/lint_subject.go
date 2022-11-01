@@ -12,7 +12,7 @@ var subject_details = "The DN shall contain a Country (C=) attribute, a Common N
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_subject",
+		Name:          "e_atis_subject",
 		Description:   subject_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

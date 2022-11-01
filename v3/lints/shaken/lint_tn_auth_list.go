@@ -10,7 +10,7 @@ type tnAuthList struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_tn_auth_list",
+		Name:          "e_atis_tn_auth_list",
 		Description:   "STI End-Entity certificates shall contain a TNAuthList extension as specified in RFC 8226. The TNAuthList shall contain a single SPC value",
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

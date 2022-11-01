@@ -10,7 +10,7 @@ type caIssuerDn struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_ca_issuer_dn",
+		Name:          "e_atis_ca_issuer_dn",
 		Description:   subject_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caExtensionUnknown_CheckApplies(t *testing.T) {
-	test.CheckAppliesIntermediateCertificate(t, "e_sti_ca_extension_unknown")
+	test.CheckAppliesIntermediateCertificate(t, "e_atis_ca_extension_unknown")
 }
 
 func Test_caExtensionUnknown_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_ca_extension_unknown", []test.Vector{
+	test.Execute(t, "e_atis_ca_extension_unknown", []test.Vector{
 		{
 			Name: "list of allowed extensions",
 			File: "shakenCa.pem",

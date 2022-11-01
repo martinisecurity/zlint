@@ -14,7 +14,7 @@ var version_details = "STI certificates shall contain Version field specifying v
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_version",
+		Name:          "e_atis_version",
 		Description:   version_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

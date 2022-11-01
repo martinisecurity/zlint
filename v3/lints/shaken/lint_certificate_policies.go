@@ -10,7 +10,7 @@ type certificatePolicies struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_certificate_policies",
+		Name:          "e_atis_certificate_policies",
 		Description:   "STI End-Entity certificates shall include a Certificate Policies extension containing a single OID value that identifies the SHAKEN Certificate Policy established by the STI-PA",
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

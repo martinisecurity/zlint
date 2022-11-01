@@ -8,7 +8,7 @@ import (
 )
 
 func TestRootAuthorityKeyIdentifier_CheckApplies(t *testing.T) {
-	test.CheckApplies(t, "e_sti_root_authority_key_identifier", []test.CheckAppliesVector{
+	test.CheckApplies(t, "e_atis_root_authority_key_identifier", []test.CheckAppliesVector{
 		{
 			Name: "Leaf certtificate",
 			File: "shakenCert.pem",
@@ -33,7 +33,7 @@ func TestRootAuthorityKeyIdentifier_CheckApplies(t *testing.T) {
 }
 
 func TestRootAuthorityKeyIdentifier_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_root_authority_key_identifier", []test.Vector{
+	test.Execute(t, "e_atis_root_authority_key_identifier", []test.Vector{
 		{
 			Name: "Root with correct AKI",
 			File: "shakenRoot.pem",

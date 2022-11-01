@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caIssuerDn_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootOrIntermediateCertificate(t, "e_sti_ca_issuer_dn")
+	test.CheckAppliesRootOrIntermediateCertificate(t, "e_atis_ca_issuer_dn")
 }
 
 func Test_caIssuerDn_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_ca_issuer_dn", []test.Vector{
+	test.Execute(t, "e_atis_ca_issuer_dn", []test.Vector{
 		{
 			Name: "correct DN",
 			File: "shakenCa.pem",

@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caSubjectCN_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootOrIntermediateCertificate(t, "e_sti_ca_subject_cn")
+	test.CheckAppliesRootOrIntermediateCertificate(t, "e_atis_ca_subject_cn")
 }
 
 func Test_caSubjectCN_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_ca_subject_cn", []test.Vector{
+	test.Execute(t, "e_atis_ca_subject_cn", []test.Vector{
 		{
 			Name: "CN=SHAKEN Intermediate",
 			File: "shakenCa.pem",

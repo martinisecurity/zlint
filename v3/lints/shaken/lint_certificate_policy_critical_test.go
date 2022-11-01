@@ -8,7 +8,7 @@ import (
 )
 
 func Test_certificatePolicyCritical_CheckApplies(t *testing.T) {
-	test.CheckApplies(t, "n_sti_certificate_policy_critical", []test.CheckAppliesVector{
+	test.CheckApplies(t, "n_atis_certificate_policy_critical", []test.CheckAppliesVector{
 		{
 			Name: "Leaf certificate with CP ext",
 			File: "shakenCert.pem",
@@ -33,7 +33,7 @@ func Test_certificatePolicyCritical_CheckApplies(t *testing.T) {
 }
 
 func Test_certificatePolicyCritical_Execute(t *testing.T) {
-	test.Execute(t, "n_sti_certificate_policy_critical", []test.Vector{
+	test.Execute(t, "n_atis_certificate_policy_critical", []test.Vector{
 		{
 			Name: "CertificatePolicies extension is critical",
 			File: "shakenCertPolicyCritical.pem",

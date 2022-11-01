@@ -18,7 +18,7 @@ type caAuthorityKeyIdentifier struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_ca_authority_key_identifier",
+		Name:          "e_atis_ca_authority_key_identifier",
 		Description:   "STI certificates shall contain an Authority Key Identifier extension",
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

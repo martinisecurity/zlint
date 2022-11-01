@@ -10,7 +10,7 @@ type caVersion struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_ca_version",
+		Name:          "e_atis_ca_version",
 		Description:   version_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

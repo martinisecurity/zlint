@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caSignatureAlgorithm_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootOrIntermediateCertificate(t, "e_sti_ca_signature_algorithm")
+	test.CheckAppliesRootOrIntermediateCertificate(t, "e_atis_ca_signature_algorithm")
 }
 
 func Test_caSignatureAlgorithm_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_ca_signature_algorithm", []test.Vector{
+	test.Execute(t, "e_atis_ca_signature_algorithm", []test.Vector{
 		{
 			Name: "incorrect algorithm",
 			File: "shakenCaSigAlgSHA1.pem",

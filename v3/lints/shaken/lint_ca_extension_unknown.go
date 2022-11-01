@@ -10,7 +10,7 @@ type caExtensionUnknown struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_ca_extension_unknown",
+		Name:          "e_atis_ca_extension_unknown",
 		Description:   "STI certificate shall not include extensions that are not specified",
 		Citation:      ATIS1000080v004_STI_Citation,
 		Source:        lint.ATIS1000080,

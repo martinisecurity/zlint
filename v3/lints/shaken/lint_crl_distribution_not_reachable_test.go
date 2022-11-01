@@ -8,12 +8,12 @@ import (
 )
 
 func Test_crlDistributionNotReachable_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_crl_distribution_not_reachable")
-	test.CheckAppliesIntermediateCertificate(t, "e_sti_ca_crl_distribution_not_reachable")
+	test.CheckAppliesLeafCertificate(t, "e_atis_crl_distribution_not_reachable")
+	test.CheckAppliesIntermediateCertificate(t, "e_atis_ca_crl_distribution_not_reachable")
 }
 
 func Test_crlDistributionNotReachable_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_crl_distribution_not_reachable", []test.Vector{
+	test.Execute(t, "e_atis_crl_distribution_not_reachable", []test.Vector{
 		{
 			Name: "crl is reachable",
 			File: "shakenCert.pem",

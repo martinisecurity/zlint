@@ -24,7 +24,7 @@ const crlDistributionNotReachable_details = "HTTP URL from the CRL Distribution 
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_crl_distribution_not_reachable",
+		Name:          "e_atis_crl_distribution_not_reachable",
 		Description:   crlDistributionNotReachable_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
@@ -34,7 +34,7 @@ func init() {
 		},
 	})
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_ca_crl_distribution_not_reachable",
+		Name:          "e_atis_ca_crl_distribution_not_reachable",
 		Description:   crlDistributionNotReachable_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

@@ -8,11 +8,11 @@ import (
 )
 
 func Test_tnAuthList_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_tn_auth_list")
+	test.CheckAppliesLeafCertificate(t, "e_atis_tn_auth_list")
 }
 
 func Test_tnAuthList_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_tn_auth_list", []test.Vector{
+	test.Execute(t, "e_atis_tn_auth_list", []test.Vector{
 		{
 			Name: "extension is absent",
 			File: "shakenCertEmpty.pem",

@@ -17,7 +17,7 @@ type basicConstraints struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_basic_constraints",
+		Name:          "e_atis_basic_constraints",
 		Description:   "STI certificates shall contain a Basic Constraints extension marked critical",
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

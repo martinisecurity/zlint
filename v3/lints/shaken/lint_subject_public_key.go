@@ -14,7 +14,7 @@ const subjectPublicKey_details = "STI certificates shall contain a Subject Publi
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_subject_public_key",
+		Name:          "e_atis_subject_public_key",
 		Description:   subjectPublicKey_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

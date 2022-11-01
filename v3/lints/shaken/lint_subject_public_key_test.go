@@ -8,11 +8,11 @@ import (
 )
 
 func Test_subjectPublicKey_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_subject_public_key")
+	test.CheckAppliesLeafCertificate(t, "e_atis_subject_public_key")
 }
 
 func Test_subjectPublicKey_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_subject_public_key", []test.Vector{
+	test.Execute(t, "e_atis_subject_public_key", []test.Vector{
 		{
 			Name: "incorrect named curve",
 			File: "shakenKeyAlgP384.pem",

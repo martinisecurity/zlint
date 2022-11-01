@@ -8,11 +8,11 @@ import (
 )
 
 func Test_version_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_version")
+	test.CheckAppliesLeafCertificate(t, "e_atis_version")
 }
 
 func Test_version_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_version", []test.Vector{
+	test.Execute(t, "e_atis_version", []test.Vector{
 		{
 			Name: "incorrect certificate version",
 			File: "shakenCertV2.pem",

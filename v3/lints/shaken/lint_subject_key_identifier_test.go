@@ -8,11 +8,11 @@ import (
 )
 
 func Test_subjectKeyIdentifier_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_subject_key_identifier")
+	test.CheckAppliesLeafCertificate(t, "e_atis_subject_key_identifier")
 }
 
 func Test_subjectKeyIdentifier_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_subject_key_identifier", []test.Vector{
+	test.Execute(t, "e_atis_subject_key_identifier", []test.Vector{
 		{
 			Name: "extension is absent",
 			File: "shakenCertEmpty.pem",

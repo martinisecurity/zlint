@@ -8,11 +8,11 @@ import (
 )
 
 func TestRootCertificatePolicies_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootCertificate(t, "e_sti_root_certificate_policies")
+	test.CheckAppliesRootCertificate(t, "e_atis_root_certificate_policies")
 }
 
 func TestRootCertificatePolicies_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_root_certificate_policies", []test.Vector{
+	test.Execute(t, "e_atis_root_certificate_policies", []test.Vector{
 		{
 			Name: "root with CP ext",
 			File: "shakenRootCertPolicy.pem",

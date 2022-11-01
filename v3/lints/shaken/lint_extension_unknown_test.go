@@ -8,11 +8,11 @@ import (
 )
 
 func Test_extensionList_Contains(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_extension_unknown")
+	test.CheckAppliesLeafCertificate(t, "e_atis_extension_unknown")
 }
 
 func Test_extensionUnknown_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_extension_unknown", []test.Vector{
+	test.Execute(t, "e_atis_extension_unknown", []test.Vector{
 		{
 			Name: "odd extension",
 			File: "shakenExtOdd.pem",

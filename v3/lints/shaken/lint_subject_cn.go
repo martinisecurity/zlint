@@ -13,7 +13,7 @@ type subjectCN struct{}
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_sti_subject_cn",
+		Name:          "e_atis_subject_cn",
 		Description:   "The Common Name attribute of an End-Entity certificate shall contain the text string “SHAKEN”, followed by a single space, followed by the SPC value identified in the TNAuthList of the End-Entity certificate",
 		Citation:      ATIS1000080v004_STI_Citation,
 		Source:        lint.ATIS1000080,

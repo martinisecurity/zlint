@@ -8,11 +8,11 @@ import (
 )
 
 func Test_crlDistribution_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_crl_distribution")
+	test.CheckAppliesLeafCertificate(t, "e_atis_crl_distribution")
 }
 
 func Test_crlDistribution_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_crl_distribution", []test.Vector{
+	test.Execute(t, "e_atis_crl_distribution", []test.Vector{
 		{
 			Name: "extension is absent",
 			File: "shakenCertEmpty.pem",

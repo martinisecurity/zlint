@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caVersion_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootOrIntermediateCertificate(t, "e_sti_ca_version")
+	test.CheckAppliesRootOrIntermediateCertificate(t, "e_atis_ca_version")
 }
 
 func Test_caVersion_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_ca_version", []test.Vector{
+	test.Execute(t, "e_atis_ca_version", []test.Vector{
 		{
 			Name: "incorrect certificate Version",
 			File: "shakenCaVersion2.pem",

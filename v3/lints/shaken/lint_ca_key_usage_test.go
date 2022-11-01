@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caKeyUsage_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootOrIntermediateCertificate(t, "e_sti_ca_key_usage")
+	test.CheckAppliesRootOrIntermediateCertificate(t, "e_atis_ca_key_usage")
 }
 
 func Test_caKeyUsage_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_ca_key_usage", []test.Vector{
+	test.Execute(t, "e_atis_ca_key_usage", []test.Vector{
 		{
 			Name: "KeyUsage with keyCertSign flag",
 			File: "shakenCa.pem",

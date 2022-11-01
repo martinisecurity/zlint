@@ -8,11 +8,11 @@ import (
 )
 
 func Test_subjectCN_CheckApplies(t *testing.T) {
-	test.CheckAppliesLeafCertificate(t, "e_sti_subject_cn")
+	test.CheckAppliesLeafCertificate(t, "e_atis_subject_cn")
 }
 
 func Test_subjectCN_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_subject_cn", []test.Vector{
+	test.Execute(t, "e_atis_subject_cn", []test.Vector{
 		{
 			Name: "incorrect subject CN",
 			File: "shakenCertEmpty.pem",

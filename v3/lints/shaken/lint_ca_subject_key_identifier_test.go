@@ -8,11 +8,11 @@ import (
 )
 
 func Test_caSubjectKeyIdentifier_CheckApplies(t *testing.T) {
-	test.CheckAppliesRootOrIntermediateCertificate(t, "e_sti_ca_subject_key_identifier")
+	test.CheckAppliesRootOrIntermediateCertificate(t, "e_atis_ca_subject_key_identifier")
 }
 
 func Test_caSubjectKeyIdentifier_Execute(t *testing.T) {
-	test.Execute(t, "e_sti_ca_subject_key_identifier", []test.Vector{
+	test.Execute(t, "e_atis_ca_subject_key_identifier", []test.Vector{
 		{
 			Name: "extension is absent",
 			File: "shakenCaEmpty.pem",
