@@ -18,23 +18,14 @@ func Test_crlDistributionNotReachable_Execute(t *testing.T) {
 			Name: "crl is reachable",
 			File: "shakenCert.pem",
 			Want: &lint.LintResult{
-				Status: lint.Pass,
-			},
-		},
-		{
-			Name: "crl is GET reachable",
-			File: "shakenCRLPointGet.pem",
-			Want: &lint.LintResult{
-				Status:  lint.Error,
-				Details: "Unable to retrieve CRL specified in CRLdp from allow listed IP address",
+				Status: lint.NA,
 			},
 		},
 		{
 			Name: "crl is unreachable",
 			File: "shakenCRLPointUnreachable.pem",
 			Want: &lint.LintResult{
-				Status:  lint.Error,
-				Details: "Unable to retrieve CRL specified in CRLdp from allow listed IP address",
+				Status: lint.NA,
 			},
 		},
 		{
