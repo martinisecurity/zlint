@@ -37,7 +37,8 @@ func (*subjectRdnUnknown) Execute(c *x509.Certificate) *lint.LintResult {
 		"2.5.4.6",  // countryName from ATIS
 		"2.5.4.10", // organization from ATIS
 		"2.5.4.7",  // localityName
-		"2.5.4.5",  // SERIALNUMBER from CP1.1
+		"2.5.4.5",  // SERIALNUMBER from CP1.1,
+		"2.5.4.8",  // State
 	})
 	for _, name := range c.Subject.Names {
 		if !list.Contains(name.Type.String()) {
