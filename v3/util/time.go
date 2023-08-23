@@ -92,6 +92,8 @@ var (
 	// should be evaluated against the new rules.
 	// January 10, 2022
 	UnitedStatesSHAKENCPv1_3_Leaf_Date = UnitedStatesSHAKENCPv1_3_Date.AddDate(0, 0, 145)
+	UnitedStatesSHAKENCPv1_4_Date      = time.Date(2023, time.June, 6, 0, 0, 0, 0, time.UTC)
+	UnitedStatesSHAKENCPv1_4_Leaf_Date = UnitedStatesSHAKENCPv1_4_Date.AddDate(0, 0, 90)
 )
 
 var (

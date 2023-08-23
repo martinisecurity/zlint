@@ -95,8 +95,10 @@ var (
 	IdEtsiQcsQctEseal          = asn1.ObjectIdentifier{0, 4, 0, 1862, 1, 6, 2}
 	IdEtsiQcsQctWeb            = asn1.ObjectIdentifier{0, 4, 0, 1862, 1, 6, 3}
 	// SHAKEN policies
-	ShakenCPv1_1OID = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 1}
-	ShakenUnitedStatesSHAKENCPOID = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 3}
+	ShakenCPv1_1OID             = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 1}
+	ShakenCPv1_2OID             = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 2}
+	ShakenUnitedStatesCPv1_3OID = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 3}
+	ShakenUnitedStatesCPv1_4OID = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 4}
 )
 
 const (
@@ -145,7 +147,7 @@ func TypeInName(name *pkix.Name, oid asn1.ObjectIdentifier) bool {
 	return false
 }
 
-//helper function to parse policyMapping extensions, returns slices of CertPolicyIds separated by domain
+// helper function to parse policyMapping extensions, returns slices of CertPolicyIds separated by domain
 func GetMappedPolicies(polMap *pkix.Extension) ([][2]asn1.ObjectIdentifier, error) {
 	if polMap == nil {
 		return nil, errors.New("policyMap: null pointer")
