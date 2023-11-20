@@ -1,9 +1,6 @@
 package shaken
 
 import (
-	"fmt"
-	"regexp"
-
 	"github.com/zmap/zcrypto/x509"
 	"github.com/zmap/zlint/v3/lint"
 	"github.com/zmap/zlint/v3/util"
@@ -53,57 +50,64 @@ ATIS-1000080v005: 6.4.1 STI Certificate Requirements
 	certificate.
 ************************************************/
 
-type subjectCN struct {
+type subjectDN struct {
 	ca bool
 }
 
 func init() {
-	description := "The Common Name attribute shall include the text string `SHAKEN` to indicate that this is a SHAKEN certificate."
+	description := "STI certificates shall include a Subject field containing a Distinguished Name (DN). The DN shall contain a Country (C=) attribute and a Common Name (CN=) attribute. Other DN attributes are optional."
+
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_cn",
+		Name:          "e_atis_subject_dn",
 		Description:   description,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
 		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewSubjectCNLeaf,
+		Lint:          NewSubjectDNLeaf,
 	})
 
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_cn_ca",
+		Name:          "e_atis_ca_subject_dn",
 		Description:   description,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
 		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewSubjectCNCA,
+		Lint:          NewSubjectDNCA,
 	})
 }
 
-func NewSubjectCN(ca bool) lint.LintInterface {
-	return &subjectCN{
-		ca,
+func NewSubjectDN(ca bool) lint.LintInterface {
+	return &subjectDN{
+		ca: ca,
 	}
 }
 
-func NewSubjectCNLeaf() lint.LintInterface {
-	return NewSubjectCN(false)
+func NewSubjectDNLeaf() lint.LintInterface {
+	return NewSubjectDN(false)
 }
 
-func NewSubjectCNCA() lint.LintInterface {
-	return NewSubjectCN(true)
+func NewSubjectDNCA() lint.LintInterface {
+	return NewSubjectDN(true)
 }
 
 // CheckApplies implements lint.LintInterface
-func (s *subjectCN) CheckApplies(c *x509.Certificate) bool {
-	return s.ca == c.IsCA
+func (l *subjectDN) CheckApplies(c *x509.Certificate) bool {
+	return l.ca == c.IsCA
 }
 
 // Execute implements lint.LintInterface
-func (*subjectCN) Execute(c *x509.Certificate) *lint.LintResult {
-	matched, _ := regexp.MatchString(`\bSHAKEN\b`, c.Subject.CommonName)
-	if !matched {
+func (*subjectDN) Execute(c *x509.Certificate) *lint.LintResult {
+	if c.Subject.Country == nil || len(c.Subject.Country) != 1 {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: fmt.Sprintf("Common Name attribute '%s' does not contain 'SHAKEN'", c.Subject.CommonName),
+			Details: "Subject DN does not contain a Country (C=) attribute",
+		}
+	}
+
+	if c.Subject.CommonNames == nil || len(c.Subject.CommonNames) != 1 {
+		return &lint.LintResult{
+			Status:  lint.Error,
+			Details: "Subject DN does not contain a Common Name (CN=) attribute",
 		}
 	}
 

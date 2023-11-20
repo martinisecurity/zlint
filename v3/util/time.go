@@ -82,6 +82,8 @@ var (
 	// If we apply the same rule of 90 days after approval for CAs to be conformant with new versions as is applied to CP->CPS
 	// changes this means any changes would be required for certificates issued on or after Sunday, January 16, 2022.
 	ATIS1000080_v004_Leaf_Date = ATIS1000080_v004_Date.AddDate(0, 0, 90)
+	ATIS1000080_v005_Date      = time.Date(2022, time.December, 12, 0, 0, 0, 0, time.UTC)
+	ATIS1000080_v005_Leaf_Date = ATIS1000080_v005_Date.AddDate(0, 0, 90)
 	// US Certificate Policy 1.1 - Approved April 7, 2020
 	UnitedStatesSHAKENCPv1_1_Date      = time.Date(2020, time.April, 7, 0, 0, 0, 0, time.UTC)
 	UnitedStatesSHAKENCPv1_1_Leaf_Date = UnitedStatesSHAKENCPv1_1_Date.AddDate(0, 0, 90)

@@ -53,61 +53,37 @@ ATIS-1000080v005: 6.4.1 STI Certificate Requirements
 	certificate.
 ************************************************/
 
-type subjectCN struct {
-	ca bool
-}
+type subjectCnRoot struct{}
 
 func init() {
-	description := "The Common Name attribute shall include the text string `SHAKEN` to indicate that this is a SHAKEN certificate."
+	description := "For root certificates, the Common Name attribute shall include the text string `ROOT` (case insensitive)."
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_cn",
+		Name:          "e_atis_subject_cn_root",
 		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
+		Citation:      ATIS1000080v004_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewSubjectCNLeaf,
-	})
-
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_cn_ca",
-		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewSubjectCNCA,
+		EffectiveDate: util.ATIS1000080_v004_Date,
+		Lint:          NewSubjectCnRoot,
 	})
 }
 
-func NewSubjectCN(ca bool) lint.LintInterface {
-	return &subjectCN{
-		ca,
-	}
-}
-
-func NewSubjectCNLeaf() lint.LintInterface {
-	return NewSubjectCN(false)
-}
-
-func NewSubjectCNCA() lint.LintInterface {
-	return NewSubjectCN(true)
+func NewSubjectCnRoot() lint.LintInterface {
+	return &subjectCnRoot{}
 }
 
 // CheckApplies implements lint.LintInterface
-func (s *subjectCN) CheckApplies(c *x509.Certificate) bool {
-	return s.ca == c.IsCA
+func (l *subjectCnRoot) CheckApplies(c *x509.Certificate) bool {
+	return util.IsRootCA(c)
 }
 
 // Execute implements lint.LintInterface
-func (*subjectCN) Execute(c *x509.Certificate) *lint.LintResult {
-	matched, _ := regexp.MatchString(`\bSHAKEN\b`, c.Subject.CommonName)
+func (l *subjectCnRoot) Execute(c *x509.Certificate) *lint.LintResult {
+	matched, _ := regexp.MatchString(`\bROOT\b`, c.Subject.CommonName)
 	if !matched {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: fmt.Sprintf("Common Name attribute '%s' does not contain 'SHAKEN'", c.Subject.CommonName),
+			Details: fmt.Sprintf("Common Name attribute '%s' does not include the text string 'ROOT' (case insensitive).", c.Subject.CommonName),
 		}
 	}
-
-	return &lint.LintResult{
-		Status: lint.Pass,
-	}
+	return &lint.LintResult{Status: lint.Pass}
 }

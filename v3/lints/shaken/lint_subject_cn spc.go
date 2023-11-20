@@ -2,7 +2,7 @@ package shaken
 
 import (
 	"fmt"
-	"regexp"
+	"strings"
 
 	"github.com/zmap/zcrypto/x509"
 	"github.com/zmap/zlint/v3/lint"
@@ -53,57 +53,44 @@ ATIS-1000080v005: 6.4.1 STI Certificate Requirements
 	certificate.
 ************************************************/
 
-type subjectCN struct {
-	ca bool
-}
+type subjectCnSpc struct{}
 
 func init() {
-	description := "The Common Name attribute shall include the text string `SHAKEN` to indicate that this is a SHAKEN certificate."
+	description := "For end-entity certificate, the Common Name attribute shall contain the text string SHAKEN, followed by a single space, followed by the SPC value identified in the TNAuthList of the end-entity certificate."
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_cn",
+		Name:          "e_atis_subject_cn_spc",
 		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
+		Citation:      ATIS1000080v004_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewSubjectCNLeaf,
-	})
-
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_cn_ca",
-		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewSubjectCNCA,
+		EffectiveDate: util.ATIS1000080_v004_Leaf_Date,
+		Lint:          NewSubjectCnSpc,
 	})
 }
 
-func NewSubjectCN(ca bool) lint.LintInterface {
-	return &subjectCN{
-		ca,
-	}
-}
-
-func NewSubjectCNLeaf() lint.LintInterface {
-	return NewSubjectCN(false)
-}
-
-func NewSubjectCNCA() lint.LintInterface {
-	return NewSubjectCN(true)
+func NewSubjectCnSpc() lint.LintInterface {
+	return &subjectCnSpc{}
 }
 
 // CheckApplies implements lint.LintInterface
-func (s *subjectCN) CheckApplies(c *x509.Certificate) bool {
-	return s.ca == c.IsCA
+func (*subjectCnSpc) CheckApplies(c *x509.Certificate) bool {
+	return util.IsSubscriberCert(c)
 }
 
 // Execute implements lint.LintInterface
-func (*subjectCN) Execute(c *x509.Certificate) *lint.LintResult {
-	matched, _ := regexp.MatchString(`\bSHAKEN\b`, c.Subject.CommonName)
-	if !matched {
+func (*subjectCnSpc) Execute(c *x509.Certificate) *lint.LintResult {
+	spc, err := GetTNEntrySPC(c)
+	if err != nil {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: fmt.Sprintf("Common Name attribute '%s' does not contain 'SHAKEN'", c.Subject.CommonName),
+			Details: fmt.Sprintf("Cannot get SPC value from the TNAuthList extension, %s", err.Error()),
+		}
+	}
+
+	match := fmt.Sprintf("SHAKEN %s", spc)
+	if !strings.Contains(c.Subject.CommonName, match) {
+		return &lint.LintResult{
+			Status:  lint.Error,
+			Details: fmt.Sprintf("Common name shall contain the text string '%s'", match),
 		}
 	}
 

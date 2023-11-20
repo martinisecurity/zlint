@@ -53,60 +53,66 @@ ATIS-1000080v005: 6.4.1 STI Certificate Requirements
 	certificate.
 ************************************************/
 
-type subjectCN struct {
+type subjectCountryIso struct {
 	ca bool
 }
 
 func init() {
-	description := "The Common Name attribute shall include the text string `SHAKEN` to indicate that this is a SHAKEN certificate."
+	description := "The Country (C=) attribute shall contain an ISO 3166-1 alpha-2 country code."
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_cn",
+		Name:          "e_atis_subject_c_iso",
 		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
+		Citation:      ATIS1000080v005_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewSubjectCNLeaf,
+		EffectiveDate: util.ATIS1000080_v005_Leaf_Date,
+		Lint:          NewSubjectCountryIsoLeaf,
 	})
 
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_cn_ca",
+		Name:          "e_atis_ca_subject_c_iso",
 		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
+		Citation:      ATIS1000080v005_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewSubjectCNCA,
+		EffectiveDate: util.ATIS1000080_v005_Date,
+		Lint:          NewSubjectCountryIsoCA,
 	})
 }
 
-func NewSubjectCN(ca bool) lint.LintInterface {
-	return &subjectCN{
-		ca,
+func NewSubjectCountryIso(ca bool) lint.LintInterface {
+	return &subjectCountryIso{
+		ca: ca,
 	}
 }
 
-func NewSubjectCNLeaf() lint.LintInterface {
-	return NewSubjectCN(false)
+func NewSubjectCountryIsoLeaf() lint.LintInterface {
+	return NewSubjectCountryIso(false)
 }
 
-func NewSubjectCNCA() lint.LintInterface {
-	return NewSubjectCN(true)
+func NewSubjectCountryIsoCA() lint.LintInterface {
+	return NewSubjectCountryIso(true)
 }
 
 // CheckApplies implements lint.LintInterface
-func (s *subjectCN) CheckApplies(c *x509.Certificate) bool {
-	return s.ca == c.IsCA
+func (l *subjectCountryIso) CheckApplies(c *x509.Certificate) bool {
+	return l.ca && c.IsCA
 }
 
 // Execute implements lint.LintInterface
-func (*subjectCN) Execute(c *x509.Certificate) *lint.LintResult {
-	matched, _ := regexp.MatchString(`\bSHAKEN\b`, c.Subject.CommonName)
+func (l *subjectCountryIso) Execute(c *x509.Certificate) *lint.LintResult {
+	if c.Subject.Country == nil || len(c.Subject.Country) != 1 {
+		return &lint.LintResult{
+			Status:  lint.Error,
+			Details: "Subject MUST be present and MUST contain exactly one value for Country (C=).",
+		}
+	}
+	countyCode := c.Subject.Country[0]
+	matched, _ := regexp.MatchString(`^[A-Z]{2}$`, countyCode)
 	if !matched {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: fmt.Sprintf("Common Name attribute '%s' does not contain 'SHAKEN'", c.Subject.CommonName),
+			Details: fmt.Sprintf("Country (C=) attribute '%s' does not contain an ISO 3166-1 alpha-2 country code.", countyCode),
 		}
 	}
-
 	return &lint.LintResult{
 		Status: lint.Pass,
 	}
