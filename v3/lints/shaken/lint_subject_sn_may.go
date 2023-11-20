@@ -55,12 +55,5 @@ func (l *subjectSnMay) CheckApplies(c *x509.Certificate) bool {
 
 // Execute implements lint.LintInterface
 func (l *subjectSnMay) Execute(c *x509.Certificate) *lint.LintResult {
-	if c.Subject.SerialNumber != "" && c.Subject.SerialNumber != c.SerialNumber.String() {
-		return &lint.LintResult{
-			Status:  lint.Error,
-			Details: "The DN serialNumber attribute does not match the certificate serialNumber.",
-		}
-	}
-
 	return &lint.LintResult{Status: lint.Pass}
 }

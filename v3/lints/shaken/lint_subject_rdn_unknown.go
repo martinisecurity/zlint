@@ -25,7 +25,7 @@ type subjectRdnUnknown struct {
 
 func init() {
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_shaken_subject_rdn_unknown",
+		Name:          "n_shaken_subject_rdn_unknown",
 		Description:   subjectRdn_details,
 		Citation:      United_States_SHAKEN_CPv1_3_Citation_3_1,
 		Source:        lint.UnitedStatesSHAKENCP,
@@ -33,7 +33,7 @@ func init() {
 		Lint:          NewSubjectRdnUnknownLeaf,
 	})
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_shaken_subject_rdn_unknown_ca",
+		Name:          "n_shaken_subject_rdn_unknown_ca",
 		Description:   subjectRdn_details,
 		Citation:      United_States_SHAKEN_CPv1_3_Citation_3_1,
 		Source:        lint.UnitedStatesSHAKENCP,
@@ -62,12 +62,10 @@ func (l *subjectRdnUnknown) CheckApplies(c *x509.Certificate) bool {
 // Execute implements lint.LintInterface
 func (*subjectRdnUnknown) Execute(c *x509.Certificate) *lint.LintResult {
 	list := []string{
-		"2.5.4.3",              // commonName from ATIS
-		"2.5.4.6",              // countryName from ATIS
-		"2.5.4.10",             // organization from ATIS
-		"2.5.4.5",              // SERIALNUMBER from CP
-		"1.2.840.113549.1.9.1", // email from PKI
-		"2.5.4.8",              // state from PKI
+		"2.5.4.3",  // commonName from ATIS
+		"2.5.4.6",  // countryName from ATIS
+		"2.5.4.10", // organization from ATIS
+		"2.5.4.5",  // SERIALNUMBER from CP
 	}
 	unknownNames := []string{}
 	for _, name := range c.Subject.Names {
@@ -78,7 +76,7 @@ func (*subjectRdnUnknown) Execute(c *x509.Certificate) *lint.LintResult {
 
 	if len(unknownNames) > 0 {
 		return &lint.LintResult{
-			Status:  lint.Error,
+			Status:  lint.Notice,
 			Details: fmt.Sprintf("The DN contains unknown RDNs: %s", strings.Join(unknownNames, ", ")),
 		}
 	}

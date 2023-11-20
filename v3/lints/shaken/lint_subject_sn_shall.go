@@ -62,12 +62,6 @@ func (l *subjectSnShall) Execute(c *x509.Certificate) *lint.LintResult {
 			Details: "The DN does not contain a serialNumber attribute.",
 		}
 	}
-	if c.Subject.SerialNumber != c.SerialNumber.String() {
-		return &lint.LintResult{
-			Status:  lint.Error,
-			Details: "The DN serialNumber attribute does not match the certificate serialNumber.",
-		}
-	}
 
 	return &lint.LintResult{Status: lint.Pass}
 }

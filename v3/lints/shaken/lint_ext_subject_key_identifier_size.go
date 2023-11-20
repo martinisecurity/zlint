@@ -1,6 +1,7 @@
 package shaken
 
 import (
+	"encoding/asn1"
 	"fmt"
 
 	"github.com/zmap/zcrypto/x509"
@@ -80,11 +81,19 @@ func (s *subjectKeyIdentifierSize) Execute(c *x509.Certificate) *lint.LintResult
 		}
 	}
 
-	if len(ext.Value) != 20 {
+	var extValue asn1.RawValue
+	_, err := asn1.Unmarshal(ext.Value, &extValue)
+	if err != nil {
 		return &lint.LintResult{
-			Status: lint.Error,
-			Details: fmt.Sprintf("Subject Key Identifier extension value is %d bytes, but must be 20 bytes",
-				len(ext.Value)),
+			Status:  lint.Error,
+			Details: fmt.Sprintf("Failed to parse Subject Key Identifier extension value: %v", err),
+		}
+	}
+
+	if len(extValue.Bytes) != 20 {
+		return &lint.LintResult{
+			Status:  lint.Error,
+			Details: fmt.Sprintf("Subject Key Identifier extension value is %d bytes, but must be 20 bytes", len(extValue.Bytes)),
 		}
 	}
 
