@@ -51,7 +51,7 @@ func NewSubjectSnShallCA() lint.LintInterface {
 
 // CheckApplies implements lint.LintInterface
 func (l *subjectSnShall) CheckApplies(c *x509.Certificate) bool {
-	return l.ca == c.IsCA && IsSTIv1_3(c)
+	return l.ca == c.IsCA && IsSTIv1_3(c) && util.IsExtInCert(c, util.TNAuthListOID)
 }
 
 // Execute implements lint.LintInterface
