@@ -1,6 +1,8 @@
 package shaken
 
 import (
+	"fmt"
+
 	"github.com/zmap/zcrypto/x509"
 	"github.com/zmap/zlint/v3/lint"
 	"github.com/zmap/zlint/v3/util"
@@ -85,7 +87,7 @@ func (l *certificatePoliciesId) Execute(c *x509.Certificate) *lint.LintResult {
 	if !found {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: "the Certificate Policies extension does not contain a single OID value that identifies the SHAKEN Certificate Policy established by the STI-PA",
+			Details: fmt.Sprintf("the Certificate Policies extension contains an invalid OID value: %s. Available OIDs: %v", cps[0].String(), wellknownPolicies),
 		}
 	}
 
