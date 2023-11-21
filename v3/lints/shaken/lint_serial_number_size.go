@@ -44,8 +44,8 @@ func init() {
 		Name:          "e_atis_ca_serial_number_size",
 		Description:   description,
 		Citation:      "ATIS-1000080.v005",
-		Source:        lint.ShakenPKI,
-		EffectiveDate: util.UnitedStatesSHAKENCPv1_4_Date,
+		Source:        lint.ATIS1000080,
+		EffectiveDate: util.ATIS1000080_v005_Date,
 		Lint:          NewSerialNumberSizeCA,
 	})
 }
