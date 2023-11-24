@@ -40,6 +40,9 @@ const (
 	AppleRootStorePolicy          LintSource = "Apple"
 	Community                     LintSource = "Community"
 	EtsiEsi                       LintSource = "ETSI_ESI"
+	ATIS1000080                   LintSource = "ATIS1000080"
+	UnitedStatesSHAKENCP          LintSource = "US_SHAKEN_CP"
+	ShakenPKI                     LintSource = "SHAKEN_PKI_BEST_PRACTICES"
 )
 
 // UnmarshalJSON implements the json.Unmarshaler interface. It ensures that the

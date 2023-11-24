@@ -76,7 +76,31 @@ var (
 	CABFBRs_1_8_0_Date                               = time.Date(2021, time.August, 25, 0, 0, 0, 0, time.UTC)
 	NoReservedDomainLabelsDate                       = time.Date(2021, time.October, 1, 0, 0, 0, 0, time.UTC)
 	CABFBRs_OU_Prohibited_Date                       = time.Date(2022, time.September, 1, 0, 0, 0, 0, time.UTC)
-	CABF_SMIME_BRs_1_0_0_Date                        = time.Date(2023, time.September, 1, 0, 0, 0, 0, time.UTC)
+	ATIS1000080_v003_Date                            = time.Date(2020, time.September, 4, 0, 0, 0, 0, time.UTC)
+	// ATIS-1000080.v003 was published on Friday, 4 September 2020.
+	// If we apply the same rule of 90 days after approval for CAs to be conformant with new versions as is applied to CP->CPS
+	// changes this means any changes would be required for certificates issued on or after Thursday, December 3, 2020.
+	ATIS1000080_v003_Leaf_Date = ATIS1000080_v003_Date.AddDate(0, 0, 90)
+	ATIS1000080_v004_Date      = time.Date(2021, time.October, 18, 0, 0, 0, 0, time.UTC)
+	// ATIS-1000080.v004 was published on Monday, 18 October 2021.
+	// If we apply the same rule of 90 days after approval for CAs to be conformant with new versions as is applied to CP->CPS
+	// changes this means any changes would be required for certificates issued on or after Sunday, January 16, 2022.
+	ATIS1000080_v004_Leaf_Date = ATIS1000080_v004_Date.AddDate(0, 0, 90)
+	ATIS1000080_v005_Date      = time.Date(2022, time.December, 12, 0, 0, 0, 0, time.UTC)
+	ATIS1000080_v005_Leaf_Date = ATIS1000080_v005_Date.AddDate(0, 0, 90)
+	// US Certificate Policy 1.1 - Approved April 7, 2020
+	UnitedStatesSHAKENCPv1_1_Date      = time.Date(2020, time.April, 7, 0, 0, 0, 0, time.UTC)
+	UnitedStatesSHAKENCPv1_1_Leaf_Date = UnitedStatesSHAKENCPv1_1_Date.AddDate(0, 0, 90)
+	UnitedStatesSHAKENCPv1_3_Date      = time.Date(2021, time.August, 18, 0, 0, 0, 0, time.UTC)
+	// CPS 1.3 was approved on August 18, 2021.
+	// If we assume that CAs CPSs were submitted for approval on the 45th day, the CPS was approved within 10 days
+	// and the CA has 90 days to become conformant then certificates issued on or after "Monday, January 10, 2022"
+	// should be evaluated against the new rules.
+	// January 10, 2022
+	UnitedStatesSHAKENCPv1_3_Leaf_Date = UnitedStatesSHAKENCPv1_3_Date.AddDate(0, 0, 145)
+	UnitedStatesSHAKENCPv1_4_Date      = time.Date(2023, time.June, 6, 0, 0, 0, 0, time.UTC)
+	UnitedStatesSHAKENCPv1_4_Leaf_Date = UnitedStatesSHAKENCPv1_4_Date.AddDate(0, 0, 90)
+	CABF_SMIME_BRs_1_0_0_Date          = time.Date(2023, time.September, 1, 0, 0, 0, 0, time.UTC)
 	// Enforcement date of CRL reason codes from Ballot SC 061
 	CABFBRs_1_8_7_Date = time.Date(2023, time.July, 15, 0, 0, 0, 0, time.UTC)
 	// Updates to the CABF BRs and EVGLs from Ballot SC 062 https://cabforum.org/2023/03/17/ballot-sc62v2-certificate-profiles-update/

@@ -51,6 +51,7 @@ var (
 	SubjectInfoAccessOID    = asn1.ObjectIdentifier{1, 3, 6, 1, 5, 5, 7, 1, 11}       // Subject Info Access Syntax
 	SubjectKeyIdentityOID   = asn1.ObjectIdentifier{2, 5, 29, 14}                     // Subject Key Identifier
 	ReasonCodeOID           = asn1.ObjectIdentifier{2, 5, 29, 21}                     // CRL Reason Code
+	TNAuthListOID           = asn1.ObjectIdentifier{1, 3, 6, 1, 5, 5, 7, 1, 26}       // TNAuthList
 	// CA/B reserved policies
 	BRDomainValidatedOID                        = asn1.ObjectIdentifier{2, 23, 140, 1, 2, 1}    // CA/B BR Domain-Validated
 	BROrganizationValidatedOID                  = asn1.ObjectIdentifier{2, 23, 140, 1, 2, 2}    // CA/B BR Organization-Validated
@@ -110,6 +111,11 @@ var (
 	IdEtsiQcsQctEsign          = asn1.ObjectIdentifier{0, 4, 0, 1862, 1, 6, 1}
 	IdEtsiQcsQctEseal          = asn1.ObjectIdentifier{0, 4, 0, 1862, 1, 6, 2}
 	IdEtsiQcsQctWeb            = asn1.ObjectIdentifier{0, 4, 0, 1862, 1, 6, 3}
+	// SHAKEN policies
+	ShakenCPv1_1OID             = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 1}
+	ShakenCPv1_2OID             = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 2}
+	ShakenUnitedStatesCPv1_3OID = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 3}
+	ShakenUnitedStatesCPv1_4OID = asn1.ObjectIdentifier{2, 16, 840, 1, 114569, 1, 1, 4}
 )
 
 const (
