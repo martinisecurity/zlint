@@ -52,7 +52,7 @@ func (l *certificatePoliciesRoot) Execute(c *x509.Certificate) *lint.LintResult 
 	if util.IsExtInCert(c, util.CertPolicyOID) {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: "the Certificate Policies extension is present in a root certificate",
+			Details: "The Certificate Policies extension is present in a root certificate",
 		}
 	}
 	return &lint.LintResult{Status: lint.Pass}

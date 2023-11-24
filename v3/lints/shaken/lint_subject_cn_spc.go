@@ -2,7 +2,7 @@ package shaken
 
 import (
 	"fmt"
-	"strings"
+	"regexp"
 
 	"github.com/zmap/zcrypto/x509"
 	"github.com/zmap/zlint/v3/lint"
@@ -86,11 +86,11 @@ func (*subjectCnSpc) Execute(c *x509.Certificate) *lint.LintResult {
 		}
 	}
 
-	match := fmt.Sprintf("SHAKEN %s", spc)
-	if !strings.Contains(c.Subject.CommonName, match) {
+	matched, _ := regexp.MatchString(fmt.Sprintf(`\bSHAKEN %s\b`, spc), c.Subject.CommonName)
+	if !matched {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: fmt.Sprintf("Common name shall contain the text string '%s'", match),
+			Details: fmt.Sprintf("Common name shall contain the text string 'SHAKEN %s', but common name is '%s'", spc, c.Subject.CommonName),
 		}
 	}
 

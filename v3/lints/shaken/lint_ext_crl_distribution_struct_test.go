@@ -1,8 +1,16 @@
 package shaken
 
 import (
+	"encoding/base64"
 	"encoding/hex"
+	"reflect"
 	"testing"
+
+	"github.com/zmap/zcrypto/x509"
+	"github.com/zmap/zcrypto/x509/pkix"
+	"github.com/zmap/zlint/v3/lint"
+	"github.com/zmap/zlint/v3/test"
+	"github.com/zmap/zlint/v3/util"
 )
 
 func Test_assertCrlDistributionPointStruct(t *testing.T) {
@@ -42,6 +50,164 @@ func Test_assertCrlDistributionPointStruct(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := assertCrlDistributionPointStruct(tt.args.raw); (err != nil) != tt.wantErr {
 				t.Errorf("assertCrlDistributionPointStruct() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func Test_ExtCrlDistributionStruct(t *testing.T) {
+	crlWithIssuerEnc := "MIGfMIGcoD6gPIY6aHR0cHM6Ly9hdXRoZW50aWNhdGUtYXBpLXN0Zy5pY29uZWN0aXYuY29tL2Rvd25sb2FkL3YxL2NybKJapFgwVjEUMBIGA1UEBwwLQnJpZGdld2F0ZXIxCzAJBgNVBAgMAk5KMRMwEQYDVQQDDApTVEktUEEgQ1JMMQswCQYDVQQGEwJVUzEPMA0GA1UECgwGU1RJLVBB"
+	crlWithIssuerRaw, _ := base64.StdEncoding.DecodeString(crlWithIssuerEnc)
+	crlWithoutIssuerEnc := "MEAwPqA8oDqGOGh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vZ3MvZ3Nvcmdhbml6YXRpb252YWxzaGEyZzIuY3Js"
+	crlWithoutIssuerRaw, _ := base64.StdEncoding.DecodeString(crlWithoutIssuerEnc)
+
+	type args struct {
+		lintName string
+		cert     *x509.Certificate
+		config   lint.Configuration
+	}
+
+	tests := []struct {
+		name string
+		args args
+		want *lint.LintResult
+	}{
+		{
+			name: "e_atis_ext_crl_distribution_struct leaf",
+			args: args{
+				lintName: "e_atis_ext_crl_distribution_struct",
+				cert: &x509.Certificate{
+					NotBefore:  util.ATIS1000080_v004_Leaf_Date,
+					IsCA:       false,
+					SelfSigned: false,
+					ExtensionsMap: map[string]pkix.Extension{
+						util.CrlDistOID.String(): {
+							Critical: false,
+							Value:    crlWithIssuerRaw,
+						},
+					},
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{Status: lint.Pass},
+		},
+		{
+			name: "e_atis_ext_crl_distribution_struct missing",
+			args: args{
+				lintName: "e_atis_ext_crl_distribution_struct",
+				cert: &x509.Certificate{
+					NotBefore:  util.ATIS1000080_v004_Leaf_Date,
+					IsCA:       false,
+					SelfSigned: false,
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{Status: lint.NA},
+		},
+		{
+			name: "e_atis_ext_crl_distribution_struct not asn1",
+			args: args{
+				lintName: "e_atis_ext_crl_distribution_struct",
+				cert: &x509.Certificate{
+					NotBefore:  util.ATIS1000080_v004_Leaf_Date,
+					IsCA:       false,
+					SelfSigned: false,
+					ExtensionsMap: map[string]pkix.Extension{
+						util.CrlDistOID.String(): {
+							Critical: false,
+							Value:    []byte("not asn1"),
+						},
+					},
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{
+				Status:  lint.Error,
+				Details: "failed to unmarshal CRL Distribution Points extension: asn1: syntax error: data truncated",
+			},
+		},
+		{
+			name: "e_atis_ext_crl_distribution_struct not sequence",
+			args: args{
+				lintName: "e_atis_ext_crl_distribution_struct",
+				cert: &x509.Certificate{
+					NotBefore:  util.ATIS1000080_v004_Leaf_Date,
+					IsCA:       false,
+					SelfSigned: false,
+					ExtensionsMap: map[string]pkix.Extension{
+						util.CrlDistOID.String(): {
+							Critical: false,
+							Value:    []byte{0x02, 0x01, 0x00},
+						},
+					},
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{
+				Status:  lint.Error,
+				Details: "invalid CRL Distribution Points extension",
+			},
+		},
+		{
+			name: "e_atis_ext_crl_distribution_struct_ca intermediate",
+			args: args{
+				lintName: "e_atis_ext_crl_distribution_struct_ca",
+				cert: &x509.Certificate{
+					NotBefore:  util.ATIS1000080_v004_Date,
+					IsCA:       true,
+					SelfSigned: false,
+					ExtensionsMap: map[string]pkix.Extension{
+						util.CrlDistOID.String(): {
+							Critical: false,
+							Value:    crlWithIssuerRaw,
+						},
+					},
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{Status: lint.Pass},
+		},
+		{
+			name: "e_atis_ext_crl_distribution_struct_ca root",
+			args: args{
+				lintName: "e_atis_ext_crl_distribution_struct_ca",
+				cert: &x509.Certificate{
+					NotBefore:  util.ATIS1000080_v004_Date,
+					IsCA:       true,
+					SelfSigned: true,
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{Status: lint.NA},
+			// The Root CA uses e_atis_ext_crl_distribution_root lint
+		},
+		{
+			name: "e_atis_ext_crl_distribution_struct without CRLIssuer",
+			args: args{
+				lintName: "e_atis_ext_crl_distribution_struct",
+				cert: &x509.Certificate{
+					NotBefore:  util.ATIS1000080_v004_Leaf_Date,
+					IsCA:       false,
+					SelfSigned: false,
+					ExtensionsMap: map[string]pkix.Extension{
+						util.CrlDistOID.String(): {
+							Critical: false,
+							Value:    crlWithoutIssuerRaw,
+						},
+					},
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{
+				Status:  lint.Error,
+				Details: "CRL Distribution Point shall contain a CRLIssuer field",
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := test.TestLintCert(tt.args.lintName, tt.args.cert, tt.args.config); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("TestLintCert() = %v, want %v", got, tt.want)
 			}
 		})
 	}

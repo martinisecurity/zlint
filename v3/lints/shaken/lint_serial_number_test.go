@@ -11,7 +11,7 @@ import (
 	"github.com/zmap/zlint/v3/util"
 )
 
-func Test_SerialNumberSize(t *testing.T) {
+func Test_SerialNumber(t *testing.T) {
 	type args struct {
 		lintName string
 		cert     *x509.Certificate
@@ -24,59 +24,76 @@ func Test_SerialNumberSize(t *testing.T) {
 		want *lint.LintResult
 	}{
 		{
-			name: "e_atis_serial_number_size leaf",
+			name: "e_atis_serial_number leaf",
 			args: args{
-				lintName: "e_atis_serial_number_size",
+				lintName: "e_atis_serial_number",
 				cert: &x509.Certificate{
-					NotBefore:    util.ATIS1000080_v005_Leaf_Date,
+					NotBefore:    util.ATIS1000080_v003_Leaf_Date,
 					IsCA:         false,
 					SelfSigned:   false,
-					SerialNumber: big.NewInt(0).SetBytes([]byte{0x81, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}),
+					SerialNumber: big.NewInt(1),
 				},
 				config: lint.NewEmptyConfig(),
 			},
 			want: &lint.LintResult{Status: lint.Pass},
 		},
 		{
-			name: "e_atis_serial_number_size leaf less than 64 bits",
+			name: "e_atis_serial_number leaf negative",
 			args: args{
-				lintName: "e_atis_serial_number_size",
+				lintName: "e_atis_serial_number",
 				cert: &x509.Certificate{
-					NotBefore:    util.ATIS1000080_v005_Leaf_Date,
+					NotBefore:    util.ATIS1000080_v003_Leaf_Date,
 					IsCA:         false,
 					SelfSigned:   false,
-					SerialNumber: big.NewInt(0).SetBytes([]byte{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}),
+					SerialNumber: big.NewInt(-1),
 				},
 				config: lint.NewEmptyConfig(),
 			},
 			want: &lint.LintResult{
 				Status:  lint.Error,
-				Details: "STI certificates shall have a serial number that contains at least 64 bits, got 57",
+				Details: "STI certificates shall include a Serial Number field containing an integer greater than zero",
 			},
 		},
 		{
-			name: "e_atis_serial_number_size_ca intermediate",
+			name: "e_atis_serial_number leaf empty",
 			args: args{
-				lintName: "e_atis_serial_number_size_ca",
+				lintName: "e_atis_serial_number",
 				cert: &x509.Certificate{
-					NotBefore:    util.ATIS1000080_v005_Date,
+					NotBefore:    util.ATIS1000080_v003_Leaf_Date,
+					IsCA:         false,
+					SelfSigned:   false,
+					SerialNumber: big.NewInt(0),
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{
+				Status:  lint.Error,
+				Details: "STI certificates shall include a Serial Number field containing an integer greater than zero",
+			},
+		},
+		{
+			name: "e_atis_serial_number_ca intermediate",
+			args: args{
+				lintName: "e_atis_serial_number_ca",
+				cert: &x509.Certificate{
+					NotBefore:    util.ATIS1000080_v003_Date,
 					IsCA:         true,
 					SelfSigned:   false,
-					SerialNumber: big.NewInt(0).SetBytes([]byte{0x81, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}),
+					SerialNumber: big.NewInt(1),
 				},
 				config: lint.NewEmptyConfig(),
 			},
 			want: &lint.LintResult{Status: lint.Pass},
 		},
 		{
-			name: "e_atis_serial_number_size_ca root",
+			name: "e_atis_serial_number_ca root",
 			args: args{
-				lintName: "e_atis_serial_number_size_ca",
+				lintName: "e_atis_serial_number_ca",
 				cert: &x509.Certificate{
-					NotBefore:    util.ATIS1000080_v005_Date,
+					NotBefore:    util.ATIS1000080_v003_Date,
 					IsCA:         true,
 					SelfSigned:   true,
-					SerialNumber: big.NewInt(0).SetBytes([]byte{0x81, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}),
+					SerialNumber: big.NewInt(1),
 				},
 				config: lint.NewEmptyConfig(),
 			},

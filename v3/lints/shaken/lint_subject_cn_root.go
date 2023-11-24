@@ -60,7 +60,7 @@ func init() {
 	lint.RegisterLint(&lint.Lint{
 		Name:          "e_atis_subject_cn_root",
 		Description:   description,
-		Citation:      ATIS1000080v004_STI_Citation,
+		Citation:      ATIS1000080v005_STI_Citation,
 		Source:        lint.ATIS1000080,
 		EffectiveDate: util.ATIS1000080_v005_Date,
 		Lint:          NewSubjectCnRoot,

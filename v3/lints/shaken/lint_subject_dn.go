@@ -67,7 +67,7 @@ func init() {
 	})
 
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ca_subject_dn",
+		Name:          "e_atis_subject_dn_ca",
 		Description:   description,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
@@ -97,17 +97,35 @@ func (l *subjectDN) CheckApplies(c *x509.Certificate) bool {
 
 // Execute implements lint.LintInterface
 func (*subjectDN) Execute(c *x509.Certificate) *lint.LintResult {
-	if c.Subject.Country == nil || len(c.Subject.Country) != 1 {
+	// Check for Country attribute
+	if c.Subject.Country == nil {
 		return &lint.LintResult{
 			Status:  lint.Error,
 			Details: "Subject DN does not contain a Country (C=) attribute",
 		}
 	}
 
-	if c.Subject.CommonNames == nil || len(c.Subject.CommonNames) != 1 {
+	// Check for CommonName attribute
+	if c.Subject.CommonNames == nil {
 		return &lint.LintResult{
 			Status:  lint.Error,
 			Details: "Subject DN does not contain a Common Name (CN=) attribute",
+		}
+	}
+
+	// Check for other Country attributes
+	if len(c.Subject.Country) > 1 {
+		return &lint.LintResult{
+			Status:  lint.Error,
+			Details: "Subject DN contains multiple Country (C=) attributes",
+		}
+	}
+
+	// Check for other CommonName attributes
+	if len(c.Subject.CommonNames) > 1 {
+		return &lint.LintResult{
+			Status:  lint.Error,
+			Details: "Subject DN contains multiple Common Name (CN=) attributes",
 		}
 	}
 

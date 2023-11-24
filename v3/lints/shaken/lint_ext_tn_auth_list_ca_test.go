@@ -5,12 +5,13 @@ import (
 	"testing"
 
 	"github.com/zmap/zcrypto/x509"
+	"github.com/zmap/zcrypto/x509/pkix"
 	"github.com/zmap/zlint/v3/lint"
 	"github.com/zmap/zlint/v3/test"
 	"github.com/zmap/zlint/v3/util"
 )
 
-func Test_Version(t *testing.T) {
+func Test_ExtTnAuthListCa(t *testing.T) {
 	type args struct {
 		lintName string
 		cert     *x509.Certificate
@@ -23,66 +24,62 @@ func Test_Version(t *testing.T) {
 		want *lint.LintResult
 	}{
 		{
-			name: "e_atis_version correct",
+			name: "e_atis_tn_auth_list_ca",
 			args: args{
-				lintName: "e_atis_version",
+				lintName: "e_atis_tn_auth_list_ca",
 				cert: &x509.Certificate{
-					Version:   3,
-					NotBefore: util.ATIS1000080_v003_Leaf_Date,
-					NotAfter:  util.ATIS1000080_v003_Leaf_Date,
-					IsCA:      false,
+					NotBefore:  util.ATIS1000080_v003_Date,
+					IsCA:       true,
+					SelfSigned: false,
 				},
 				config: lint.NewEmptyConfig(),
 			},
 			want: &lint.LintResult{Status: lint.Pass},
 		},
 		{
-			name: "e_atis_version wrong",
+			name: "e_atis_tn_auth_list_ca has TNAuthList",
 			args: args{
-				lintName: "e_atis_version",
+				lintName: "e_atis_tn_auth_list_ca",
 				cert: &x509.Certificate{
-					Version:   2,
-					NotBefore: util.ATIS1000080_v003_Leaf_Date,
-					NotAfter:  util.ATIS1000080_v003_Leaf_Date,
-					IsCA:      false,
+					NotBefore:  util.ATIS1000080_v003_Date,
+					IsCA:       true,
+					SelfSigned: false,
+					ExtensionsMap: map[string]pkix.Extension{
+						util.TNAuthListOID.String(): {},
+					},
 				},
 				config: lint.NewEmptyConfig(),
 			},
 			want: &lint.LintResult{
 				Status:  lint.Error,
-				Details: "STI certificates shall contain Version field specifying version 3",
+				Details: "TNAuthList extension should not be present on CA certificates",
 			},
 		},
 		{
-			name: "e_atis_version_ca correct",
+			name: "e_atis_tn_auth_list_ca root",
 			args: args{
-				lintName: "e_atis_version_ca",
+				lintName: "e_atis_tn_auth_list_ca",
 				cert: &x509.Certificate{
-					Version:   3,
-					NotBefore: util.ATIS1000080_v003_Date,
-					NotAfter:  util.ATIS1000080_v003_Leaf_Date,
-					IsCA:      true,
+					NotBefore:  util.ATIS1000080_v003_Date,
+					IsCA:       true,
+					SelfSigned: true,
 				},
 				config: lint.NewEmptyConfig(),
 			},
 			want: &lint.LintResult{Status: lint.Pass},
 		},
 		{
-			name: "e_atis_version_ca wrong",
+			name: "e_atis_tn_auth_list_ca leaf",
 			args: args{
-				lintName: "e_atis_version_ca",
+				lintName: "e_atis_tn_auth_list_ca",
 				cert: &x509.Certificate{
-					Version:   2,
-					NotBefore: util.ATIS1000080_v003_Date,
-					NotAfter:  util.ATIS1000080_v003_Leaf_Date,
-					IsCA:      true,
+					NotBefore:  util.ATIS1000080_v003_Date,
+					IsCA:       false,
+					SelfSigned: false,
 				},
 				config: lint.NewEmptyConfig(),
 			},
-			want: &lint.LintResult{
-				Status:  lint.Error,
-				Details: "STI certificates shall contain Version field specifying version 3",
-			},
+			want: &lint.LintResult{Status: lint.NA},
 		},
 	}
 	for _, tt := range tests {

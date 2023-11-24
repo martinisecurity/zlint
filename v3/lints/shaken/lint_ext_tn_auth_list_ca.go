@@ -50,7 +50,7 @@ func (*tnAuthListCa) Execute(c *x509.Certificate) *lint.LintResult {
 	if ext != nil {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: "the TNAuthList extension is present",
+			Details: "TNAuthList extension should not be present on CA certificates",
 		}
 	}
 	return &lint.LintResult{Status: lint.Pass}

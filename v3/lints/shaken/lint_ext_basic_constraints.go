@@ -2,7 +2,6 @@ package shaken
 
 import (
 	"encoding/asn1"
-	"fmt"
 
 	"github.com/zmap/zcrypto/x509"
 	"github.com/zmap/zlint/v3/lint"
@@ -64,7 +63,7 @@ func (*basicConstraints) Execute(c *x509.Certificate) *lint.LintResult {
 		if _, err := asn1.Unmarshal(ext.Value, &basicConstraints); err != nil {
 			return &lint.LintResult{
 				Status:  lint.Error,
-				Details: fmt.Sprintf("unable to parse BasicConstraints extension: %s", err.Error()),
+				Details: "Failed to parse BasicConstraints extension",
 			}
 		}
 

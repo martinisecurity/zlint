@@ -45,7 +45,7 @@ func init() {
 	})
 
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ca_subject_key_identifier_size",
+		Name:          "e_atis_subject_key_identifier_size_ca",
 		Description:   description,
 		Citation:      ATIS1000080v004_STI_Citation,
 		Source:        lint.ATIS1000080,
@@ -86,7 +86,7 @@ func (s *subjectKeyIdentifierSize) Execute(c *x509.Certificate) *lint.LintResult
 	if err != nil {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: fmt.Sprintf("Failed to parse Subject Key Identifier extension value: %v", err),
+			Details: fmt.Sprintf("Failed to parse Subject Key Identifier extension value: %s", err.Error()),
 		}
 	}
 

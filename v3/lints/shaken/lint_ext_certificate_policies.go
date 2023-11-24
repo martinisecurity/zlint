@@ -72,14 +72,14 @@ func (*certificatePolicies) Execute(c *x509.Certificate) *lint.LintResult {
 	if ext == nil {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: "the Certificate Policies extension is not present",
+			Details: "The Certificate Policies extension is not present",
 		}
 	}
 
 	if ext.Critical {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: "the Certificate Policies extension is marked as critical",
+			Details: "The Certificate Policies extension is marked as critical",
 		}
 	}
 
@@ -88,7 +88,7 @@ func (*certificatePolicies) Execute(c *x509.Certificate) *lint.LintResult {
 	if len(cps) != 1 {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: "the Certificate Policies extension does not contain a single OID value",
+			Details: "The Certificate Policies extension does not contain a single OID value",
 		}
 	}
 

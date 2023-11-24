@@ -41,7 +41,7 @@ func init() {
 	})
 
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ca_serial_number_size",
+		Name:          "e_atis_serial_number_size_ca",
 		Description:   description,
 		Citation:      "ATIS-1000080.v005",
 		Source:        lint.ATIS1000080,
@@ -71,23 +71,14 @@ func (s *serialNumberSize) CheckApplies(c *x509.Certificate) bool {
 
 // Execute implements lint.LintInterface
 func (*serialNumberSize) Execute(c *x509.Certificate) *lint.LintResult {
-	if err := assertSerialNumberSize(c); err != nil {
+	if c.SerialNumber.BitLen() < 64 {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: err.Error(),
+			Details: fmt.Sprintf("STI certificates shall have a serial number that contains at least 64 bits, got %d", c.SerialNumber.BitLen()),
 		}
 	}
 
 	return &lint.LintResult{
 		Status: lint.Pass,
 	}
-}
-
-// assertSerialNumberSize checks that the serial number is at least 64 bits.
-func assertSerialNumberSize(c *x509.Certificate) error {
-	if len(c.SerialNumber.Bytes()) < 8 {
-		return fmt.Errorf("serial number size is less than 64 bits, got %d bits", len(c.SerialNumber.Bytes())*8)
-	}
-
-	return nil
 }

@@ -44,7 +44,7 @@ func init() {
 	})
 
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ca_signature_algorithm",
+		Name:          "e_atis_signature_algorithm_ca",
 		Description:   signatureAlgorithm_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
@@ -76,7 +76,7 @@ func (s *signatureAlgorithm) CheckApplies(c *x509.Certificate) bool {
 func (*signatureAlgorithm) Execute(c *x509.Certificate) *lint.LintResult {
 	if c.SignatureAlgorithmOID.String() != "1.2.840.10045.4.3.2" {
 		// CP v1.4 specification allows ECDSA with P-384. It conflicts with ATIS-1000080.
-		if IsSTIv1_4(c) && c.SignatureAlgorithmOID.String() == "1.2.840.10045.4.3.3" {
+		if (IsSTIv1_4(c) || util.IsRootCA(c)) && c.SignatureAlgorithmOID.String() == "1.2.840.10045.4.3.3" {
 			return &lint.LintResult{
 				Status:  lint.Pass,
 				Details: "SignatureAlgorithm field is 'ecdsa-with-SHA384' which is allowed by CP v1.4",

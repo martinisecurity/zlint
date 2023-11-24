@@ -69,7 +69,7 @@ func init() {
 	})
 
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ca_subject_c_iso",
+		Name:          "e_atis_subject_c_iso_ca",
 		Description:   description,
 		Citation:      ATIS1000080v005_STI_Citation,
 		Source:        lint.ATIS1000080,
@@ -94,7 +94,7 @@ func NewSubjectCountryIsoCA() lint.LintInterface {
 
 // CheckApplies implements lint.LintInterface
 func (l *subjectCountryIso) CheckApplies(c *x509.Certificate) bool {
-	return l.ca && c.IsCA
+	return l.ca == c.IsCA
 }
 
 // Execute implements lint.LintInterface

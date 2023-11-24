@@ -66,7 +66,7 @@ func init() {
 	})
 
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ca_subject_o_required",
+		Name:          "e_atis_subject_o_required_ca",
 		Description:   description,
 		Citation:      ATIS1000080v004_STI_Citation,
 		Source:        lint.ATIS1000080,

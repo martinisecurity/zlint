@@ -55,7 +55,7 @@ func (l *crlDistributionRoot) Execute(c *x509.Certificate) *lint.LintResult {
 	if util.IsExtInCert(c, util.CrlDistOID) {
 		return &lint.LintResult{
 			Status:  lint.Error,
-			Details: "the CRL Distribution Points extension is present in a root certificate",
+			Details: "The CRL Distribution Points extension is present in a root certificate",
 		}
 	}
 	return &lint.LintResult{Status: lint.Pass}

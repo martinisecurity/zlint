@@ -40,11 +40,11 @@ func init() {
 		Lint:          NewSerialNumberLeaf,
 	})
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ca_serial_number",
+		Name:          "e_atis_serial_number_ca",
 		Description:   description,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
+		EffectiveDate: util.ATIS1000080_v003_Date,
 		Lint:          NewSerialNumberCA,
 	})
 }

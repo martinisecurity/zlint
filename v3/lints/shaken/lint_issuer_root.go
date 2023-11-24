@@ -43,7 +43,7 @@ func NewIssuerRoot() lint.LintInterface {
 
 // CheckApplies implements LintInterface.
 func (l *issuerRoot) CheckApplies(c *x509.Certificate) bool {
-	return util.IsSelfSigned(c)
+	return util.IsRootCA(c)
 }
 
 // Execute implements LintInterface.

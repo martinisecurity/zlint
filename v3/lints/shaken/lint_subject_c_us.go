@@ -3,6 +3,7 @@ package shaken
 import (
 	"github.com/zmap/zcrypto/x509"
 	"github.com/zmap/zlint/v3/lint"
+	"github.com/zmap/zlint/v3/util"
 )
 
 /************************************************
@@ -15,6 +16,22 @@ type subjectCUs struct {
 }
 
 func init() {
+	lint.RegisterLint(&lint.Lint{
+		Name:          "e_atis_subject_c_us",
+		Description:   "Subject MUST contain a Country (C=) of \"US\".",
+		Citation:      United_States_SHAKEN_CPv1_4_Citation_3_1,
+		Source:        lint.UnitedStatesSHAKENCP,
+		EffectiveDate: util.UnitedStatesSHAKENCPv1_4_Leaf_Date,
+		Lint:          NewSubjectCUsLeaf,
+	})
+	lint.RegisterLint(&lint.Lint{
+		Name:          "e_atis_subject_c_us_ca",
+		Description:   "Subject MUST contain a Country (C=) of \"US\".",
+		Citation:      "ATIS-1000080",
+		Source:        lint.UnitedStatesSHAKENCP,
+		EffectiveDate: util.UnitedStatesSHAKENCPv1_4_Date,
+		Lint:          NewSubjectCUsCA,
+	})
 }
 
 func NewSubjectCUs(ca bool) lint.LintInterface {

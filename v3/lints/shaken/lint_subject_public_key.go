@@ -49,7 +49,7 @@ func init() {
 		Lint:          NewSubjectPublicKeyLeaf,
 	})
 	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ca_subject_public_key",
+		Name:          "e_atis_subject_public_key_ca",
 		Description:   subjectPublicKey_details,
 		Citation:      ATIS1000080v003_STI_Citation,
 		Source:        lint.ATIS1000080,

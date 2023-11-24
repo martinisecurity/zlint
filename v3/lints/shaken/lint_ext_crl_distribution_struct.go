@@ -35,6 +35,24 @@ type crlDistributionStruct struct {
 }
 
 func init() {
+	description := "STI intermediate and end-entity certificates shall contain a CRL Distribution Points extension containing a single DistributionPoint entry. The DistributionPoint entry shall contain a distributionPoint field identifying the HTTP URL reference to the file containing the SHAKEN CRL hosted by the STI-PA, and a cRLIssuer field that contains the DN of the issuer of the CRL."
+	lint.RegisterLint(&lint.Lint{
+		Name:          "e_atis_ext_crl_distribution_struct",
+		Description:   description,
+		Citation:      ATIS1000080v004_STI_Citation,
+		Source:        lint.ATIS1000080,
+		EffectiveDate: util.ATIS1000080_v004_Leaf_Date,
+		Lint:          NewCrlDistributionStructLeaf,
+	})
+
+	lint.RegisterLint(&lint.Lint{
+		Name:          "e_atis_ext_crl_distribution_struct_ca",
+		Description:   description,
+		Citation:      ATIS1000080v004_STI_Citation,
+		Source:        lint.ATIS1000080,
+		EffectiveDate: util.ATIS1000080_v004_Date,
+		Lint:          NewCrlDistributionStructCA,
+	})
 }
 
 func NewCrlDistributionStruct(ca bool) lint.LintInterface {
@@ -57,12 +75,6 @@ func (l *crlDistributionStruct) CheckApplies(c *x509.Certificate) bool {
 // Execute implements lint.LintInterface
 func (l *crlDistributionStruct) Execute(c *x509.Certificate) *lint.LintResult {
 	ext := util.GetExtFromCert(c, util.CrlDistOID)
-	if ext == nil {
-		return &lint.LintResult{
-			Status: lint.NA,
-		}
-	}
-
 	if err := assertCrlDistributionPointStruct(ext.Value); err != nil {
 		return &lint.LintResult{
 			Status:  lint.Error,
