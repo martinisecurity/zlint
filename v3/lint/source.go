@@ -54,7 +54,7 @@ func (s *LintSource) UnmarshalJSON(data []byte) error {
 	}
 
 	switch LintSource(throwAway) {
-	case RFC5280, RFC5480, RFC5891, CABFBaselineRequirements, CABFEVGuidelines, CABFSMIMEBaselineRequirements, MozillaRootStorePolicy, AppleRootStorePolicy, Community, EtsiEsi:
+	case RFC5280, RFC5480, RFC5891, CABFBaselineRequirements, CABFEVGuidelines, CABFSMIMEBaselineRequirements, MozillaRootStorePolicy, AppleRootStorePolicy, Community, EtsiEsi, ATIS1000080, UnitedStatesSHAKENCP, ShakenPKI:
 		*s = LintSource(throwAway)
 		return nil
 	default:
@@ -92,6 +92,12 @@ func (s *LintSource) FromString(src string) {
 		*s = Community
 	case EtsiEsi:
 		*s = EtsiEsi
+	case ATIS1000080:
+		*s = ATIS1000080
+	case UnitedStatesSHAKENCP:
+		*s = UnitedStatesSHAKENCP
+	case ShakenPKI:
+		*s = ShakenPKI
 	}
 }
 
