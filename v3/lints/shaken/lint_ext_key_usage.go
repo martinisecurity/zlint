@@ -31,13 +31,15 @@ ATIS-1000080v005: 6.4.1 STI Certificate Requirements
 type keyUsage struct{}
 
 func init() {
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_key_usage",
-		Description:   "STI certificates shall contain a Key Usage extension marked as critical.",
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewKeyUsage,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_key_usage",
+			Description:   "STI certificates shall contain a Key Usage extension marked as critical.",
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewKeyUsage,
 	})
 }
 

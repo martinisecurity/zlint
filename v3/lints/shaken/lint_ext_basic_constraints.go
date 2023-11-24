@@ -35,13 +35,15 @@ type asnBasicConstraints struct {
 type basicConstraints struct{}
 
 func init() {
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_basic_constraints",
-		Description:   "STI certificates shall contain a Basic Constraints extension marked critical",
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewBasicConstraints,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_basic_constraints",
+			Description:   "STI certificates shall contain a Basic Constraints extension marked critical",
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewBasicConstraints,
 	})
 }
 

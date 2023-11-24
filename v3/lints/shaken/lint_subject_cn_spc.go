@@ -57,13 +57,15 @@ type subjectCnSpc struct{}
 
 func init() {
 	description := "For end-entity certificate, the Common Name attribute shall contain the text string SHAKEN, followed by a single space, followed by the SPC value identified in the TNAuthList of the end-entity certificate."
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_cn_spc",
-		Description:   description,
-		Citation:      ATIS1000080v004_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Leaf_Date,
-		Lint:          NewSubjectCnSpc,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_cn_spc",
+			Description:   description,
+			Citation:      ATIS1000080v004_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v004_Leaf_Date,
+		},
+		Lint: NewSubjectCnSpc,
 	})
 }
 

@@ -34,22 +34,26 @@ type signatureAlgorithm struct {
 var signatureAlgorithm_details = "STI certificates shall contain a Signature Algorithm field with the value 'ecdsa-with-SHA256'"
 
 func init() {
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_signature_algorithm",
-		Description:   signatureAlgorithm_details,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewSignatureAlgorithmLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_signature_algorithm",
+			Description:   signatureAlgorithm_details,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
+		},
+		Lint: NewSignatureAlgorithmLeaf,
 	})
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_signature_algorithm_ca",
-		Description:   signatureAlgorithm_details,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewSignatureAlgorithmCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_signature_algorithm_ca",
+			Description:   signatureAlgorithm_details,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewSignatureAlgorithmCA,
 	})
 }
 

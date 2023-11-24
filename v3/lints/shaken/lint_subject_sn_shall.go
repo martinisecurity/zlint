@@ -19,21 +19,25 @@ type subjectSnShall struct {
 
 func init() {
 	description := "The DN shall contain a serialNumber attribute."
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_us_cp_subject_sn_shall",
-		Description:   description,
-		Citation:      United_States_SHAKEN_CPv1_3_Citation_3_1,
-		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Leaf_Date,
-		Lint:          NewSubjectSnShallLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_us_cp_subject_sn_shall",
+			Description:   description,
+			Citation:      United_States_SHAKEN_CPv1_3_Citation_3_1,
+			Source:        lint.UnitedStatesSHAKENCP,
+			EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Leaf_Date,
+		},
+		Lint: NewSubjectSnShallLeaf,
 	})
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_us_cp_subject_sn_shall_ca",
-		Description:   description,
-		Citation:      United_States_SHAKEN_CPv1_3_Citation_3_1,
-		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Date,
-		Lint:          NewSubjectSnShallCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_us_cp_subject_sn_shall_ca",
+			Description:   description,
+			Citation:      United_States_SHAKEN_CPv1_3_Citation_3_1,
+			Source:        lint.UnitedStatesSHAKENCP,
+			EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Date,
+		},
+		Lint: NewSubjectSnShallCA,
 	})
 }
 

@@ -56,22 +56,26 @@ type subjectOrgRequired struct {
 
 func init() {
 	description := "The DN shall contain an Organization (O=) attribute."
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_o_required",
-		Description:   description,
-		Citation:      ATIS1000080v004_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Leaf_Date,
-		Lint:          NewSubjectOrgRequiredLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_o_required",
+			Description:   description,
+			Citation:      ATIS1000080v004_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v004_Leaf_Date,
+		},
+		Lint: NewSubjectOrgRequiredLeaf,
 	})
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_o_required_ca",
-		Description:   description,
-		Citation:      ATIS1000080v004_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Date,
-		Lint:          NewSubjectOrgRequiredCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_o_required_ca",
+			Description:   description,
+			Citation:      ATIS1000080v004_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v004_Date,
+		},
+		Lint: NewSubjectOrgRequiredCA,
 	})
 }
 

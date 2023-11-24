@@ -31,22 +31,26 @@ var allowedExtensions = map[string]bool{
 func init() {
 	description := "STI certificates shall not include extensions that are not specified."
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_not_specified",
-		Description:   description,
-		Citation:      ATIS1000080v005_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v005_Leaf_Date,
-		Lint:          NewExtNotSpecifiedLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_not_specified",
+			Description:   description,
+			Citation:      ATIS1000080v005_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v005_Leaf_Date,
+		},
+		Lint: NewExtNotSpecifiedLeaf,
 	})
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_not_specified_ca",
-		Description:   description,
-		Citation:      ATIS1000080v005_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v005_Date,
-		Lint:          NewExtNotSpecifiedCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_not_specified_ca",
+			Description:   description,
+			Citation:      ATIS1000080v005_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v005_Date,
+		},
+		Lint: NewExtNotSpecifiedCA,
 	})
 }
 

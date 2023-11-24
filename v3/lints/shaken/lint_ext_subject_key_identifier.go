@@ -32,22 +32,26 @@ type subjectKeyIdentifier struct {
 }
 
 func init() {
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_key_identifier",
-		Description:   subjectKeyIdentifier_details,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewSubjectKeyIdentifierLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_key_identifier",
+			Description:   subjectKeyIdentifier_details,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
+		},
+		Lint: NewSubjectKeyIdentifierLeaf,
 	})
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_key_identifier_ca",
-		Description:   subjectKeyIdentifier_details,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewSubjectKeyIdentifierCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_key_identifier_ca",
+			Description:   subjectKeyIdentifier_details,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewSubjectKeyIdentifierCA,
 	})
 }
 

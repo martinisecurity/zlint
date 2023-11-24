@@ -28,13 +28,15 @@ type certificatePoliciesRoot struct{}
 
 func init() {
 	description := "STI root certificates shall not contain a Certificate Policies extension."
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_certificate_policies_root",
-		Description:   description,
-		Citation:      ATIS1000080v005_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v005_Date,
-		Lint:          NewCertificatePoliciesRoot,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_certificate_policies_root",
+			Description:   description,
+			Citation:      ATIS1000080v005_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v005_Date,
+		},
+		Lint: NewCertificatePoliciesRoot,
 	})
 }
 

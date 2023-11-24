@@ -25,13 +25,15 @@ ATIS-1000080v005: 6.4.1 STI Certificate Requirements
 type tnAuthListCa struct{}
 
 func init() {
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_tn_auth_list_ca",
-		Description:   "STI intermediate and root certificates shall not contain a TNAuthList extension",
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewTnAuthListCa,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_tn_auth_list_ca",
+			Description:   "STI intermediate and root certificates shall not contain a TNAuthList extension",
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewTnAuthListCa,
 	})
 }
 

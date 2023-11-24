@@ -57,22 +57,26 @@ type subjectDN struct {
 func init() {
 	description := "STI certificates shall include a Subject field containing a Distinguished Name (DN). The DN shall contain a Country (C=) attribute and a Common Name (CN=) attribute. Other DN attributes are optional."
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_dn",
-		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewSubjectDNLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_dn",
+			Description:   description,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
+		},
+		Lint: NewSubjectDNLeaf,
 	})
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_dn_ca",
-		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewSubjectDNCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_dn_ca",
+			Description:   description,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewSubjectDNCA,
 	})
 }
 

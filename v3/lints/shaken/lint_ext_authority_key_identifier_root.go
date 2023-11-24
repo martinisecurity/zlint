@@ -41,13 +41,15 @@ type authorityKeyIdentifierRoot struct{}
 
 func init() {
 	description := "Root certificates containing an Authority Key Identifier extension must have a keyIdentifier field within the Authority Key Identifier that matches the Subject Key Identifier value of the same root certificate."
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_authority_key_identifier_root",
-		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewAuthorityKeyIdentifierRoot,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_authority_key_identifier_root",
+			Description:   description,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewAuthorityKeyIdentifierRoot,
 	})
 }
 

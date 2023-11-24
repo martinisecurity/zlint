@@ -31,13 +31,15 @@ type crlDistributionRoot struct{}
 
 func init() {
 	description := "Root certificates shall not contain a CRL Distribution Points extension."
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_crl_distribution_root",
-		Description:   description,
-		Citation:      ATIS1000080v005_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v005_Date,
-		Lint:          NewCrlDistributionRoot,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_crl_distribution_root",
+			Description:   description,
+			Citation:      ATIS1000080v005_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v005_Date,
+		},
+		Lint: NewCrlDistributionRoot,
 	})
 }
 

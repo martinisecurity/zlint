@@ -25,21 +25,25 @@ type certificatePoliciesId struct {
 
 func init() {
 	description := "The Certificate Policies extension MUST contain a single OID value that identifies the SHAKEN Certificate Policy established by the STI-PA"
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_shaken_certificate_policies_id",
-		Description:   description,
-		Citation:      United_States_SHAKEN_CPv1_3_Citation_1_3,
-		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Leaf_Date,
-		Lint:          NewCertificatePoliciesIdLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_shaken_certificate_policies_id",
+			Description:   description,
+			Citation:      United_States_SHAKEN_CPv1_3_Citation_1_3,
+			Source:        lint.UnitedStatesSHAKENCP,
+			EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Leaf_Date,
+		},
+		Lint: NewCertificatePoliciesIdLeaf,
 	})
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_shaken_certificate_policies_id_ca",
-		Description:   description,
-		Citation:      United_States_SHAKEN_CPv1_3_Citation_1_3,
-		Source:        lint.UnitedStatesSHAKENCP,
-		EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Date,
-		Lint:          NewCertificatePoliciesIdCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_shaken_certificate_policies_id_ca",
+			Description:   description,
+			Citation:      United_States_SHAKEN_CPv1_3_Citation_1_3,
+			Source:        lint.UnitedStatesSHAKENCP,
+			EffectiveDate: util.UnitedStatesSHAKENCPv1_3_Date,
+		},
+		Lint: NewCertificatePoliciesIdCA,
 	})
 }
 

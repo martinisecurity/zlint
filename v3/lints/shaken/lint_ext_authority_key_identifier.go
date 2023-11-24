@@ -41,22 +41,26 @@ type authorityKeyIdentifier struct {
 
 func init() {
 	description := "STI certificates shall contain an Authority Key Identifier extension"
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_authority_key_identifier",
-		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewAuthorityKeyIdentifierLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_authority_key_identifier",
+			Description:   description,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
+		},
+		Lint: NewAuthorityKeyIdentifierLeaf,
 	})
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_authority_key_identifier_ca",
-		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewAuthorityKeyIdentifierCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_authority_key_identifier_ca",
+			Description:   description,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewAuthorityKeyIdentifierCA,
 	})
 }
 

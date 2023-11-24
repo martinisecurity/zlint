@@ -27,13 +27,15 @@ type issuerRoot struct{}
 
 func init() {
 	description := "Issuer field of root certificate must match Subject field"
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_issuer_root",
-		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewIssuerRoot,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_issuer_root",
+			Description:   description,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewIssuerRoot,
 	})
 }
 

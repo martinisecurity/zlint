@@ -37,22 +37,26 @@ type crlDistribution struct {
 func init() {
 	description := "STI End-Entity certificates shall contain a CRL Distribution Points extension containing a single DistributionPoint entry"
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_crl_distribution",
-		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewCrlDistributionLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_crl_distribution",
+			Description:   description,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
+		},
+		Lint: NewCrlDistributionLeaf,
 	})
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_crl_distribution_ca",
-		Description:   description,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewCrlDistributionCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_crl_distribution_ca",
+			Description:   description,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewCrlDistributionCA,
 	})
 }
 

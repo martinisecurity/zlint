@@ -26,21 +26,25 @@ type version struct {
 var version_details = "STI certificates shall contain Version field specifying version 3"
 
 func init() {
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_version",
-		Description:   version_details,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewVersionLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_version",
+			Description:   version_details,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
+		},
+		Lint: NewVersionLeaf,
 	})
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_version_ca",
-		Description:   version_details,
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Date,
-		Lint:          NewVersionCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_version_ca",
+			Description:   version_details,
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Date,
+		},
+		Lint: NewVersionCA,
 	})
 }
 

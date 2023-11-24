@@ -28,13 +28,15 @@ ATIS-1000080v005: 6.4.1 STI Certificate Requirements
 type tnAuthListSpcFormat struct{}
 
 func init() {
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_tn_auth_list_spc_format",
-		Description:   "The SPC value in the TNAuthList extension shall contain only numbers and uppercase letters",
-		Citation:      ATIS1000080v005_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v005_Leaf_Date,
-		Lint:          NewTnAuthListSpcFormat,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_tn_auth_list_spc_format",
+			Description:   "The SPC value in the TNAuthList extension shall contain only numbers and uppercase letters",
+			Citation:      ATIS1000080v005_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v005_Leaf_Date,
+		},
+		Lint: NewTnAuthListSpcFormat,
 	})
 }
 

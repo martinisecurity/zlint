@@ -35,22 +35,26 @@ type subjectKeyIdentifierSize struct {
 func init() {
 	description := "The value for the Subject Key Identifier shall contain the 160-bit SHA-1 hash of the public key"
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_key_identifier_size",
-		Description:   description,
-		Citation:      ATIS1000080v004_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Leaf_Date,
-		Lint:          NewSubjectKeyIdentifierSizeLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_key_identifier_size",
+			Description:   description,
+			Citation:      ATIS1000080v004_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v004_Leaf_Date,
+		},
+		Lint: NewSubjectKeyIdentifierSizeLeaf,
 	})
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_key_identifier_size_ca",
-		Description:   description,
-		Citation:      ATIS1000080v004_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v004_Date,
-		Lint:          NewSubjectKeyIdentifierSizeCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_key_identifier_size_ca",
+			Description:   description,
+			Citation:      ATIS1000080v004_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v004_Date,
+		},
+		Lint: NewSubjectKeyIdentifierSizeCA,
 	})
 }
 

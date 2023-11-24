@@ -31,13 +31,15 @@ ATIS-1000080v005: 6.4.1 STI Certificate Requirements
 type keyUsageEe struct{}
 
 func init() {
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_ext_key_usage_ee",
-		Description:   "The Key Usage extension for STI end-entity certificates shall contain a single key usage value of digitalSignature (0).",
-		Citation:      ATIS1000080v003_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
-		Lint:          NewKeyUsageEe,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_ext_key_usage_ee",
+			Description:   "The Key Usage extension for STI end-entity certificates shall contain a single key usage value of digitalSignature (0).",
+			Citation:      ATIS1000080v003_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v003_Leaf_Date,
+		},
+		Lint: NewKeyUsageEe,
 	})
 }
 

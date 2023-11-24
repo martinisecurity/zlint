@@ -31,22 +31,26 @@ type serialNumberSize struct {
 func init() {
 	description := "STI certificates shall have a serial number that contains at least 64 bits."
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_serial_number_size",
-		Description:   description,
-		Citation:      ATIS1000080v005_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v005_Leaf_Date,
-		Lint:          NewSerialNumberSizeLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_serial_number_size",
+			Description:   description,
+			Citation:      ATIS1000080v005_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v005_Leaf_Date,
+		},
+		Lint: NewSerialNumberSizeLeaf,
 	})
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_serial_number_size_ca",
-		Description:   description,
-		Citation:      "ATIS-1000080.v005",
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v005_Date,
-		Lint:          NewSerialNumberSizeCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_serial_number_size_ca",
+			Description:   description,
+			Citation:      "ATIS-1000080.v005",
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v005_Date,
+		},
+		Lint: NewSerialNumberSizeCA,
 	})
 }
 

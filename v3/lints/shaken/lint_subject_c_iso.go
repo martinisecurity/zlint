@@ -59,22 +59,26 @@ type subjectCountryIso struct {
 
 func init() {
 	description := "The Country (C=) attribute shall contain an ISO 3166-1 alpha-2 country code."
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_c_iso",
-		Description:   description,
-		Citation:      ATIS1000080v005_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v005_Leaf_Date,
-		Lint:          NewSubjectCountryIsoLeaf,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_c_iso",
+			Description:   description,
+			Citation:      ATIS1000080v005_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v005_Leaf_Date,
+		},
+		Lint: NewSubjectCountryIsoLeaf,
 	})
 
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_c_iso_ca",
-		Description:   description,
-		Citation:      ATIS1000080v005_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v005_Date,
-		Lint:          NewSubjectCountryIsoCA,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_c_iso_ca",
+			Description:   description,
+			Citation:      ATIS1000080v005_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v005_Date,
+		},
+		Lint: NewSubjectCountryIsoCA,
 	})
 }
 

@@ -57,13 +57,15 @@ type subjectCnRoot struct{}
 
 func init() {
 	description := "For root certificates, the Common Name attribute shall include the text string `ROOT` (case insensitive)."
-	lint.RegisterLint(&lint.Lint{
-		Name:          "e_atis_subject_cn_root",
-		Description:   description,
-		Citation:      ATIS1000080v005_STI_Citation,
-		Source:        lint.ATIS1000080,
-		EffectiveDate: util.ATIS1000080_v005_Date,
-		Lint:          NewSubjectCnRoot,
+	lint.RegisterCertificateLint(&lint.CertificateLint{
+		LintMetadata: lint.LintMetadata{
+			Name:          "e_atis_subject_cn_root",
+			Description:   description,
+			Citation:      ATIS1000080v005_STI_Citation,
+			Source:        lint.ATIS1000080,
+			EffectiveDate: util.ATIS1000080_v005_Date,
+		},
+		Lint: NewSubjectCnRoot,
 	})
 }
 
