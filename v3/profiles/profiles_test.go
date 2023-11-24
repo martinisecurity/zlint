@@ -54,6 +54,7 @@ func TestNotMissingAnyLintSources(t *testing.T) {
 		"etsi":          true,
 		"mozilla":       true,
 		"rfc":           true,
+		"shaken":        true,
 	}
 	dir, err := ioutil.ReadDir("../lints")
 	if err != nil {
