@@ -1,5 +1,5 @@
 /*
- * ZLint Copyright 2022 Regents of the University of Michigan
+ * ZLint Copyright 2023 Regents of the University of Michigan
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -19,6 +19,10 @@ import (
 
 	"github.com/zmap/zcrypto/encoding/asn1"
 	"github.com/zmap/zcrypto/x509"
+)
+
+const (
+	DurationDay = 24 * time.Hour
 )
 
 var (
@@ -96,6 +100,11 @@ var (
 	UnitedStatesSHAKENCPv1_3_Leaf_Date = UnitedStatesSHAKENCPv1_3_Date.AddDate(0, 0, 145)
 	UnitedStatesSHAKENCPv1_4_Date      = time.Date(2023, time.June, 6, 0, 0, 0, 0, time.UTC)
 	UnitedStatesSHAKENCPv1_4_Leaf_Date = UnitedStatesSHAKENCPv1_4_Date.AddDate(0, 0, 90)
+	CABF_SMIME_BRs_1_0_0_Date          = time.Date(2023, time.September, 1, 0, 0, 0, 0, time.UTC)
+	// Enforcement date of CRL reason codes from Ballot SC 061
+	CABFBRs_1_8_7_Date = time.Date(2023, time.July, 15, 0, 0, 0, 0, time.UTC)
+	// Updates to the CABF BRs and EVGLs from Ballot SC 062 https://cabforum.org/2023/03/17/ballot-sc62v2-certificate-profiles-update/
+	SC62EffectiveDate = time.Date(2023, time.September, 15, 0, 0, 0, 0, time.UTC)
 )
 
 var (
