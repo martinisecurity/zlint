@@ -73,7 +73,10 @@ func NewCrlDistributionStructCA() lint.LintInterface {
 
 // CheckApplies implements lint.LintInterface
 func (l *crlDistributionStruct) CheckApplies(c *x509.Certificate) bool {
-	return util.IsExtInCert(c, util.CrlDistOID) && l.ca == c.IsCA && !util.IsRootCA(c)
+	return util.IsExtInCert(c, util.CrlDistOID) &&
+		l.ca == c.IsCA &&
+		!util.IsRootCA(c) &&
+		IsSTIv1_4(c)
 }
 
 // Execute implements lint.LintInterface

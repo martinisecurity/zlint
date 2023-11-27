@@ -6,6 +6,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/zmap/zcrypto/encoding/asn1"
 	"github.com/zmap/zcrypto/x509"
 	"github.com/zmap/zcrypto/x509/pkix"
 	"github.com/zmap/zlint/v3/lint"
@@ -86,6 +87,9 @@ func Test_ExtCrlDistributionStruct(t *testing.T) {
 							Value:    crlWithIssuerRaw,
 						},
 					},
+					PolicyIdentifiers: []asn1.ObjectIdentifier{
+						util.ShakenUnitedStatesCPv1_4OID,
+					},
 				},
 				config: lint.NewEmptyConfig(),
 			},
@@ -99,6 +103,9 @@ func Test_ExtCrlDistributionStruct(t *testing.T) {
 					NotBefore:  util.ATIS1000080_v004_Leaf_Date,
 					IsCA:       false,
 					SelfSigned: false,
+					PolicyIdentifiers: []asn1.ObjectIdentifier{
+						util.ShakenUnitedStatesCPv1_4OID,
+					},
 				},
 				config: lint.NewEmptyConfig(),
 			},
@@ -117,6 +124,9 @@ func Test_ExtCrlDistributionStruct(t *testing.T) {
 							Critical: false,
 							Value:    []byte("not asn1"),
 						},
+					},
+					PolicyIdentifiers: []asn1.ObjectIdentifier{
+						util.ShakenUnitedStatesCPv1_4OID,
 					},
 				},
 				config: lint.NewEmptyConfig(),
@@ -140,6 +150,9 @@ func Test_ExtCrlDistributionStruct(t *testing.T) {
 							Value:    []byte{0x02, 0x01, 0x00},
 						},
 					},
+					PolicyIdentifiers: []asn1.ObjectIdentifier{
+						util.ShakenUnitedStatesCPv1_4OID,
+					},
 				},
 				config: lint.NewEmptyConfig(),
 			},
@@ -162,6 +175,9 @@ func Test_ExtCrlDistributionStruct(t *testing.T) {
 							Value:    crlWithIssuerRaw,
 						},
 					},
+					PolicyIdentifiers: []asn1.ObjectIdentifier{
+						util.ShakenUnitedStatesCPv1_4OID,
+					},
 				},
 				config: lint.NewEmptyConfig(),
 			},
@@ -175,6 +191,9 @@ func Test_ExtCrlDistributionStruct(t *testing.T) {
 					NotBefore:  util.ATIS1000080_v004_Date,
 					IsCA:       true,
 					SelfSigned: true,
+					PolicyIdentifiers: []asn1.ObjectIdentifier{
+						util.ShakenUnitedStatesCPv1_4OID,
+					},
 				},
 				config: lint.NewEmptyConfig(),
 			},
@@ -194,6 +213,9 @@ func Test_ExtCrlDistributionStruct(t *testing.T) {
 							Critical: false,
 							Value:    crlWithoutIssuerRaw,
 						},
+					},
+					PolicyIdentifiers: []asn1.ObjectIdentifier{
+						util.ShakenUnitedStatesCPv1_4OID,
 					},
 				},
 				config: lint.NewEmptyConfig(),
