@@ -80,7 +80,7 @@ func (l *subjectCnRoot) CheckApplies(c *x509.Certificate) bool {
 
 // Execute implements lint.LintInterface
 func (l *subjectCnRoot) Execute(c *x509.Certificate) *lint.LintResult {
-	matched, _ := regexp.MatchString(`\bROOT\b`, c.Subject.CommonName)
+	matched, _ := regexp.MatchString(`(?i)\bROOT\b`, c.Subject.CommonName)
 	if !matched {
 		return &lint.LintResult{
 			Status:  lint.Error,

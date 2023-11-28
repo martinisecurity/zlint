@@ -24,7 +24,7 @@ func Test_SubjectCnRoot(t *testing.T) {
 		want *lint.LintResult
 	}{
 		{
-			name: "e_atis_subject_cn_root correct",
+			name: "e_atis_subject_cn_root in uppercase",
 			args: args{
 				lintName: "e_atis_subject_cn_root",
 				cert: &x509.Certificate{
@@ -40,7 +40,7 @@ func Test_SubjectCnRoot(t *testing.T) {
 			want: &lint.LintResult{Status: lint.Pass},
 		},
 		{
-			name: "e_atis_subject_cn_root case sensitive",
+			name: "e_atis_subject_cn_root in lowercase",
 			args: args{
 				lintName: "e_atis_subject_cn_root",
 				cert: &x509.Certificate{
@@ -54,8 +54,25 @@ func Test_SubjectCnRoot(t *testing.T) {
 				config: lint.NewEmptyConfig(),
 			},
 			want: &lint.LintResult{
-				Status:  lint.Error,
-				Details: "Common Name attribute 'SHAKEN root ca' does not include the text string 'ROOT' (case insensitive).",
+				Status: lint.Pass,
+			},
+		},
+		{
+			name: "e_atis_subject_cn_root in camelcase",
+			args: args{
+				lintName: "e_atis_subject_cn_root",
+				cert: &x509.Certificate{
+					NotBefore:  util.ATIS1000080_v005_Date,
+					IsCA:       true,
+					SelfSigned: true,
+					Subject: pkix.Name{
+						CommonName: "SHAKEN Root CA",
+					},
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{
+				Status: lint.Pass,
 			},
 		},
 		{
