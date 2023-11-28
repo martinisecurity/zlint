@@ -132,8 +132,61 @@ func Test_SubjectPublicKey(t *testing.T) {
 				config: lint.NewEmptyConfig(),
 			},
 			want: &lint.LintResult{
-				Status:  lint.Pass,
-				Details: "Subject Public Key Info field contains a public key that is 384 bits, which is allowed by CP v1.4",
+				Status:  lint.Warn,
+				Details: "STI certificate was issued for CP v1.4 and it has a 384-bit public key. ATIS-1000080v005 only allows 256-bit public keys, while CP v1.4 allows the use of 384-bit public keys.",
+			},
+		},
+		{
+			name: "e_atis_subject_public_key_ca root namedCurve P-256",
+			args: args{
+				lintName: "e_atis_subject_public_key_ca",
+				cert: &x509.Certificate{
+					NotBefore:             util.UnitedStatesSHAKENCPv1_3_Date,
+					IsCA:                  true,
+					SelfSigned:            true,
+					PublicKeyAlgorithmOID: asn1.ObjectIdentifier{1, 2, 840, 10045, 2, 1}, // id-ecPublicKey
+					PublicKey:             ecdsaP256,
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{
+				Status: lint.Pass,
+			},
+		},
+		{
+			name: "e_atis_subject_public_key_ca root namedCurve P-384 before CP v1.4",
+			args: args{
+				lintName: "e_atis_subject_public_key_ca",
+				cert: &x509.Certificate{
+					NotBefore:             util.UnitedStatesSHAKENCPv1_3_Date,
+					IsCA:                  true,
+					SelfSigned:            true,
+					PublicKeyAlgorithmOID: asn1.ObjectIdentifier{1, 2, 840, 10045, 2, 1}, // id-ecPublicKey
+					PublicKey:             ecdsaP384,
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{
+				Status:  lint.Error,
+				Details: "Root CA has a 384-bit public key. ATIS-1000080v005 only allows 256-bit public keys, while CP v1.4 allows the use of 384-bit public keys.",
+			},
+		},
+		{
+			name: "e_atis_subject_public_key_ca namedCurve P-384 after CP v1.4",
+			args: args{
+				lintName: "e_atis_subject_public_key_ca",
+				cert: &x509.Certificate{
+					NotBefore:             util.UnitedStatesSHAKENCPv1_4_Date,
+					IsCA:                  true,
+					SelfSigned:            true,
+					PublicKeyAlgorithmOID: asn1.ObjectIdentifier{1, 2, 840, 10045, 2, 1}, // id-ecPublicKey
+					PublicKey:             ecdsaP384,
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{
+				Status:  lint.Warn,
+				Details: "Root CA was issued after CP v1.4 date and it has a 384-bit public key. ATIS-1000080v005 only allows 256-bit public keys, while CP v1.4 allows the use of 384-bit public keys.",
 			},
 		},
 	}

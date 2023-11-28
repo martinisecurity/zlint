@@ -10,22 +10,22 @@ import (
 
 /************************************************
 ATIS-1000080v003: 6.4.1 SHAKEN Certificate Requirements
-  SHAKEN certificates shall contain a Subject Public Key Info field specifying a Public
+	SHAKEN certificates shall contain a Subject Public Key Info field specifying a Public
 	Key Algorithm of "id.ecPublicKey` and containing a 256-bit public key.
 
 ATIS-1000080v004: 6.4.1 STI Certificate Requirements
-  STI certificates shall contain a Subject Public Key Info field specifying a Public Key
+	STI certificates shall contain a Subject Public Key Info field specifying a Public Key
 	Algorithm of "id-ecPublicKey" and containing a 256-bit public key.
 
 ATIS-1000080v005: 6.4.1 STI Certificate Requirements
-  STI certificates shall contain a Subject Public Key Info field. The AlgorithmIdentifier
+	STI certificates shall contain a Subject Public Key Info field. The AlgorithmIdentifier
 	field shall contain an algorithm field containing the value "id-ecPublicKey` and a
 	namedCurve field containing the value National Institute of Standards and Technology (NIST)
 	`P-256`, as defined in RFC 5480, Elliptic Curve Cryptography Subject Public Key Information.
 	The subjectPublicKey field shall contain a 256-bit public key.
 
 CP v1.4: 6.1.5 Key Sizes
-  CAs that issue STI Certificates under this CP shall generate digital signatures with
+	CAs that issue STI Certificates under this CP shall generate digital signatures with
 	the Elliptic Curve Digital Signature Algorithm (ECDSA) with Curve P-256 and SHA-256 or
 	ECDSA with Curve P-384 and SHA-384. CAs that issue STI Certificates under this CP shall
 	generate digital signatures with a NIST-approved hash function that offer the same
@@ -98,11 +98,24 @@ func (*subjectPublicKey) Execute(c *x509.Certificate) *lint.LintResult {
 	}
 	if ecKey == nil || namedCurve.Name != "P-256" {
 		// CP v1.4 supports P-384, but ATIS-1000080v005 does not
-		if IsSTIv1_4(c) && c.IsCA && namedCurve.Name == "P-384" {
-			return &lint.LintResult{
-				Status: lint.Pass,
-				Details: fmt.Sprintf("Subject Public Key Info field contains a public key that is %d bits, which is allowed by CP v1.4",
-					ecKey.Pub.Curve.Params().BitSize),
+		if namedCurve.Name == "P-384" {
+			if util.IsRootCA(c) {
+				if !c.NotBefore.Before(util.UnitedStatesSHAKENCPv1_4_Date) {
+					return &lint.LintResult{
+						Status:  lint.Warn,
+						Details: "Root CA was issued after CP v1.4 date and it has a 384-bit public key. ATIS-1000080v005 only allows 256-bit public keys, while CP v1.4 allows the use of 384-bit public keys.",
+					}
+				}
+				return &lint.LintResult{
+					Status:  lint.Error,
+					Details: "Root CA has a 384-bit public key. ATIS-1000080v005 only allows 256-bit public keys, while CP v1.4 allows the use of 384-bit public keys.",
+				}
+			}
+			if IsSTIv1_4(c) && c.IsCA {
+				return &lint.LintResult{
+					Status:  lint.Warn,
+					Details: "STI certificate was issued for CP v1.4 and it has a 384-bit public key. ATIS-1000080v005 only allows 256-bit public keys, while CP v1.4 allows the use of 384-bit public keys.",
+				}
 			}
 		}
 
