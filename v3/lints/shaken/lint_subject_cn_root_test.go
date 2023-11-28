@@ -76,6 +76,25 @@ func Test_SubjectCnRoot(t *testing.T) {
 			},
 		},
 		{
+			name: "e_atis_subject_cn_root incorrect",
+			args: args{
+				lintName: "e_atis_subject_cn_root",
+				cert: &x509.Certificate{
+					NotBefore:  util.ATIS1000080_v005_Date,
+					IsCA:       true,
+					SelfSigned: true,
+					Subject: pkix.Name{
+						CommonName: "SHAKEN Roots CA",
+					},
+				},
+				config: lint.NewEmptyConfig(),
+			},
+			want: &lint.LintResult{
+				Status:  lint.Error,
+				Details: "Common Name attribute 'SHAKEN Roots CA' does not include the text string 'ROOT' (case insensitive).",
+			},
+		},
+		{
 			name: "e_atis_subject_cn_root intermediate",
 			args: args{
 				lintName: "e_atis_subject_cn_root",
